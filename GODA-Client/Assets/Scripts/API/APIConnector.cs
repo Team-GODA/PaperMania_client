@@ -3,8 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
-using NUnit.Framework.Constraints;
-
 
 public class APIConnector : MonoBehaviour
 {
@@ -31,19 +29,28 @@ public class APIConnector : MonoBehaviour
     /// <param name="endPoint">엔드포인트</param>
     /// <param name="onSuccess">성공시 실행할 엑션</param>
     /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
-    public void Get<T>(string endPoint, Action<T> onSuccess, Action<string> onError = null)
+    public void Get<T>(string endPoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
-        StartCoroutine(GetRequestGeneric(endPoint, onSuccess, onError));
+        StartCoroutine(GetRequestGeneric(endPoint, onSuccess, onError, needSession));
     }
 
-    private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError)
+    private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
         using (UnityWebRequest request = UnityWebRequest.Get(baseUrl + endpoint))
         {
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            if (needSession)
+            {
+                request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
+                Debug.Log(PlayerPrefs.GetString("sessionId"));                
+            }
+
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
+                Debug.Log(request.downloadHandler.text);
                 try
                 {
                     T result = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
@@ -60,32 +67,33 @@ public class APIConnector : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// API 통신 중 Post 메서드를 실행하는 코드입ㄴ디ㅏ.
-    /// </summary>
-    /// <typeparam name="TReq">요청 클래스</typeparam>
-    /// <typeparam name="TRes"></typeparam>
-    /// <param name="endPoint"></param>
-    /// <param name="body"></param>
-    /// <param name="onSuccess"></param>
-    /// <param name="onError"></param>
 
-    public void Post<TReq, TRes>(string endPoint, TReq body, Action<TRes> onSuccess, Action<string> onError = null)
+    public void Post<TRes>(string endPoint, object body, Action<TRes> onSuccess, Action<string> onError = null, bool needSession = false)
     {
-        string jsonData = JsonConvert.SerializeObject(body);
-        StartCoroutine(PostRequestGeneric(endPoint, jsonData, onSuccess, onError));
+        string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
+        StartCoroutine(PostRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
     }
 
-    private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError)
+    private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
         using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "POST"))
         {
-            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(jsonToSend);
-            request.downloadHandler = new DownloadHandlerBuffer();
+            if (!string.IsNullOrEmpty(jsonData))
+            {
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            }
+            else
+                request.uploadHandler = new UploadHandlerRaw(new byte[0]);
+
             request.SetRequestHeader("Content-Type", "application/json");
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            if (needSession)
+                request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
 
             yield return request.SendWebRequest();
+
 
             if (request.result == UnityWebRequest.Result.Success)
             {
@@ -106,11 +114,58 @@ public class APIConnector : MonoBehaviour
         }
     }
 
-}
+    public void Patch<TRes>(string endPoint, object body, Action<TRes> onSuccess, Action<string> onError = null, bool needSession = false)
+    {
+        string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
+        StartCoroutine(PatchRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
+    }
 
-public enum APIType
-{
-    get = 0,
-    post,
-    patch
+    private IEnumerator PatchRequestGeneric<TRes>(string endPoint, string jsonData, Action<TRes> onSuccess, Action<string> onError, bool needSession)
+    {
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endPoint, "PATCH"))
+        {
+            if (!string.IsNullOrEmpty(jsonData))
+            {
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            }
+            else
+            {
+                request.uploadHandler = new UploadHandlerRaw(new byte[0]);
+            }
+
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            if (needSession)
+            {
+                request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
+            }
+
+            yield return request.SendWebRequest();
+
+            Debug.Log($"StatusCode: {request.responseCode}");
+            Debug.Log($"Raw Response: {request.downloadHandler.text}");
+            Debug.Log($"Error: {request.error}");
+
+            Debug.Log(request.downloadHandler.text);
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                try
+                {
+                    TRes result = JsonConvert.DeserializeObject<TRes>(request.downloadHandler.text);
+                    onSuccess?.Invoke(result);
+                }
+                catch (Exception e)
+                {
+                    onError?.Invoke("Json 변환 실패 : " + e.Message);
+                }
+            }
+            else
+            {
+                onError?.Invoke(request.error);
+            }
+        }
+    }
 }

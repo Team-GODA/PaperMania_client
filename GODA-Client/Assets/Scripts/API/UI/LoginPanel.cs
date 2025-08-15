@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
     public InputField IDField;
     public InputField PWField;
+    public UnityEvent LoginEvent;
 
     private bool isNull()
     {
@@ -32,9 +34,14 @@ public class LoginPanel : MonoBehaviour
             password = PWField.text
         };
 
-        APIConnector.instance.Post<LoginBody, LoginResponse>("api/v1/auth/login", body, (user) =>
+        APIConnector.instance.Post<Response<LoginResponse>>("api/v1/auth/login", body, (user) =>
         {
-            Debug.Log($"{user.message} {user.sessionId}");
+            Debug.Log($"{user.Message} : {user.Data.sessionId}");
+            PlayerPrefs.SetString("sessionId", user.Data.sessionId);
+            Debug.Log(user.Data.id);
+            PlayerPrefs.SetInt("Id", user.Data.id);
+
+            LoginEvent?.Invoke();
         });
     }
 }

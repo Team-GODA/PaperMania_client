@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 [Serializable]
 public class PlayerLevel
@@ -18,7 +19,7 @@ public class PlayerName
 [Serializable]
 public class LoginResponse
 {
-    public string message;
+    public int id;
     public string sessionId;
 }
 
@@ -42,4 +43,30 @@ public class ExpLevelUpResponse
     public int userId;
     public int newLevel;
     public int newExp;
+}
+[Serializable]
+public class Name
+{
+    public string playerName;
+}
+
+
+[Serializable]
+public class Account
+{
+    public string email;
+    public string playerId;
+    public string password;
+}
+
+public class Response<T>
+{
+    [JsonProperty("errorCode")]
+    public int ErrorCode { get; set; }
+
+    [JsonProperty("message")]
+    public string Message { get; set; }
+
+    [JsonProperty("data")]
+    public T Data { get; set; }
 }
