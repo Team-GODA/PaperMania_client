@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class CharacterTestCode : MonoBehaviour
 {
+    [Tooltip("테스트 모델의 애니메이터")]
     public Animator animator;
 
     private Vector3 startPos;
+    private GameObject animatorObj;
 
     void Start()
     {
-        startPos = animator.gameObject.transform.position;
+        animatorObj = animator.gameObject;
+        startPos = animatorObj.transform.position;
     }
 
     public void DOHit()
@@ -27,6 +30,6 @@ public class CharacterTestCode : MonoBehaviour
 
     public void Reset()
     {
-        animator.gameObject.transform.position = startPos;
+        animatorObj.transform.position = startPos;
     }
 }
