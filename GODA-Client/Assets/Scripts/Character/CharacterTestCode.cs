@@ -8,7 +8,7 @@ public class CharacterTestCode : MonoBehaviour
 
     void Start()
     {
-        startPos = transform.position;
+        startPos = animator.gameObject.transform.position;
     }
 
     public void DOHit()
@@ -27,6 +27,6 @@ public class CharacterTestCode : MonoBehaviour
 
     public void Reset()
     {
-        transform.position = startPos;
+        animator.gameObject.transform.position = startPos;
     }
 }
