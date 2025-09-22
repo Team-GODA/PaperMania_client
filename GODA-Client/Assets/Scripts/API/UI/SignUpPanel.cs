@@ -1,4 +1,3 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -10,6 +9,7 @@ public class SignUpPanel : MonoBehaviour
     public InputField PWField;
 
     public UnityEvent OnSuccessEvent;
+    public EndpointSO endPoint;
 
     public void SignUp()
     {
@@ -22,7 +22,7 @@ public class SignUpPanel : MonoBehaviour
                 password = PWField.text
             };
 
-            APIConnector.instance.Post<Response<string>>("api/v1/auth/register", account, (body) =>
+            APIConnector.instance.Post<Response<string>>(endPoint.RegisterEndPoint, account, (body) =>
             {
                 Debug.Log($"{body.Message}");
                 OnSuccessEvent?.Invoke();

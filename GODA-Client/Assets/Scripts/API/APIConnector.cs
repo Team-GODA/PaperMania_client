@@ -8,8 +8,7 @@ public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
     [SerializeField]
-    private string baseUrl;
-
+    private string BaseUrl;
     void Awake()
     {
         if (instance == null)
@@ -31,26 +30,28 @@ public class APIConnector : MonoBehaviour
     /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
     public void Get<T>(string endPoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
+        Debug.Log("EndPoint : " + endPoint);
+        Debug.Log("Url : " + BaseUrl + endPoint);
         StartCoroutine(GetRequestGeneric(endPoint, onSuccess, onError, needSession));
     }
 
     private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(baseUrl + endpoint))
+        using (UnityWebRequest request = UnityWebRequest.Get(BaseUrl + endpoint))
         {
             request.SetRequestHeader("Content-Type", "application/json");
 
             if (needSession)
             {
                 request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
-                Debug.Log(PlayerPrefs.GetString("sessionId"));                
+                Debug.Log(PlayerPrefs.GetString("sessionId"));
             }
 
             yield return request.SendWebRequest();
+            Debug.Log(request.downloadHandler.text);
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                Debug.Log(request.downloadHandler.text);
                 try
                 {
                     T result = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
@@ -71,12 +72,14 @@ public class APIConnector : MonoBehaviour
     public void Post<TRes>(string endPoint, object body, Action<TRes> onSuccess, Action<string> onError = null, bool needSession = false)
     {
         string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
+        Debug.Log("EndPoint : " + endPoint);
+        Debug.Log("Url : " + BaseUrl + endPoint);
         StartCoroutine(PostRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
     }
 
     private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "POST"))
         {
             if (!string.IsNullOrEmpty(jsonData))
             {
@@ -93,7 +96,7 @@ public class APIConnector : MonoBehaviour
                 request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
 
             yield return request.SendWebRequest();
-
+            Debug.Log(request.downloadHandler.text);
 
             if (request.result == UnityWebRequest.Result.Success)
             {
@@ -122,7 +125,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator PatchRequestGeneric<TRes>(string endPoint, string jsonData, Action<TRes> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endPoint, "PATCH"))
+        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endPoint, "PATCH"))
         {
             if (!string.IsNullOrEmpty(jsonData))
             {

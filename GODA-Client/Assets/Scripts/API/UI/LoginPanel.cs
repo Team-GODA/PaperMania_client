@@ -7,6 +7,7 @@ public class LoginPanel : MonoBehaviour
     public InputField IDField;
     public InputField PWField;
     public UnityEvent LoginEvent;
+    public EndpointSO endPoint;
 
     private bool isNull()
     {
@@ -34,7 +35,7 @@ public class LoginPanel : MonoBehaviour
             password = PWField.text
         };
 
-        APIConnector.instance.Post<Response<LoginResponse>>("api/v1/auth/login", body, (user) =>
+        APIConnector.instance.Post<Response<LoginResponse>>(endPoint.LoginEndPoint, body, (user) =>
         {
             Debug.Log($"{user.Message} : {user.Data.sessionId}");
             PlayerPrefs.SetString("sessionId", user.Data.sessionId);
@@ -42,6 +43,9 @@ public class LoginPanel : MonoBehaviour
             PlayerPrefs.SetInt("Id", user.Data.id);
 
             LoginEvent?.Invoke();
+        }, (log) =>
+        {
+            Debug.Log(log);
         });
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SetName : MonoBehaviour
 {
     public InputField text;
+    public EndpointSO endpointSO;
 
     public void NameUpdate()
     {
@@ -14,10 +15,10 @@ public class SetName : MonoBehaviour
             playerName = text.text
         };
 
-        APIConnector.instance.Post<Response<Name>>("api/v1/data/player", newName, (user) =>
+        APIConnector.instance.Post<Response<Name>>(endpointSO.PlayerDataEndPoint, newName, (user) =>
         {
             Debug.Log("New Name : " + user.Data.playerName);
-        }, (user)=>
+        }, (user) =>
         {
             Debug.Log(user);
         }, true);
