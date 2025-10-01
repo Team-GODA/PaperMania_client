@@ -94,36 +94,36 @@ public class AttackTarget : MonoBehaviour
     {
         attack1.boxCol.enabled = true;
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = true;
+        attack1.boxCol.enabled = false;
     }
     IEnumerator Target2Attack()
     {
-        attack1.boxCol.enabled = true;
+        attack2.boxCol.enabled = true; 
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = false;
+        attack2.boxCol.enabled = false;
     }
     IEnumerator Target3Attack()
     {
-        attack1.boxCol.enabled = true;
+        attack3.boxCol.enabled = true;
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = false;
+        attack3.boxCol.enabled = false;
     }
     IEnumerator Target4Attack()
     {
-        attack1.boxCol.enabled = true;
+        attack4.boxCol.enabled = true;
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = false;
+        attack4.boxCol.enabled = false;
     }
     IEnumerator Target5Attack()
     {
-        attack1.boxCol.enabled = true;
+        attack5.boxCol.enabled = true;
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = false;
+        attack5.boxCol.enabled = false;
     }
     IEnumerator Target6Attack()
     {
-        attack1.boxCol.enabled = true;
+        attack6.boxCol.enabled = true;
         yield return new WaitForSeconds(0.1f);
-        attack1.boxCol.enabled = false;
+        attack6.boxCol.enabled = false;
     }
 }

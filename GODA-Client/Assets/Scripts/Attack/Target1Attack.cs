@@ -11,6 +11,14 @@ public class Target1Attack : MonoBehaviour
         boxCol = GetComponent<BoxCollider2D>();
     }
 
+    private void Update()
+    {
+        if (boxCol.enabled)
+        {
+            Debug.Log("fjdnavibwrig");
+        }
+    }
+
     public void GetDmg(float dmg)
     {
         attackDmg = dmg;
