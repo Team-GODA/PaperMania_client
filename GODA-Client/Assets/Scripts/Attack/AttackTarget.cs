@@ -63,6 +63,33 @@ public class AttackTarget : MonoBehaviour
         }
     }
 
+    public virtual void AOEAttack(string attackPos, float dmg)
+    {
+        switch (attackPos)
+        {
+            case "front":
+                attack1.GetDmg(dmg);
+                attack2.GetDmg(dmg);
+                StartCoroutine(Target1Attack());
+                StartCoroutine(Target2Attack());
+                break;
+            case "mid":
+                attack3.GetDmg(dmg);
+                attack4.GetDmg(dmg);
+                StartCoroutine(Target3Attack());
+                StartCoroutine(Target4Attack());
+                break;
+            case "back":
+                attack5.GetDmg(dmg);
+                attack6.GetDmg(dmg);
+                StartCoroutine(Target5Attack());
+                StartCoroutine(Target6Attack());
+                break;
+            default:
+                break;
+        }
+    }
+
     IEnumerator Target1Attack()
     {
         attack1.boxCol.enabled = true;
