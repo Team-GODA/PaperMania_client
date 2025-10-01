@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class DemoEnemy : MonoBehaviour
+public class DemoEnemy : Enemy
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public bool die;
+
+    protected override void Start()
     {
-        
+        maxHP = 100;
+        base.Start();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (nowHP <= 0)
+        {
+            die = true;
+        }
+        else
+        {
+            die = false;
+        }
     }
 }

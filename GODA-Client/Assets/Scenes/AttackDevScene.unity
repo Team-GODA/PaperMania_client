@@ -834,11 +834,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 312294240}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &381304260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1209,11 +1210,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 465195762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &572888321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,11 +1439,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 620099031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &674184456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1990,11 +1993,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1198461928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &1309992679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2602,11 +2606,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1619475678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &1732605418
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,11 +3168,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864019764}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a0431013fa011144ab882ddd0fa0aff, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ebf5afd45220f544b0684dd04220e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 100
+  maxHP: 0
   nowHP: 0
+  die: 0
 --- !u!1 &2089441424
 GameObject:
   m_ObjectHideFlags: 0
