@@ -12,3 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c07c82e85d7a344fbafe9b1fda9390b, type: 3}
   m_Name: endPoint
   m_EditorClassIdentifier: 
+  <BaseUrl>k__BackingField: http://gsmsv-1.yujun.kr:29489/api/v3/
+  <AuthEndPoint>k__BackingField: auth/
+  <LoginEndPoint>k__BackingField: login
+  <RegisterEndPoint>k__BackingField: register
+  <LogoutEndPoint>k__BackingField: logout
+  <DataEndPoint>k__BackingField: data/
+  <PlayerNameEndPoint>k__BackingField: name
+  <PlayerDataEndPoint>k__BackingField: player

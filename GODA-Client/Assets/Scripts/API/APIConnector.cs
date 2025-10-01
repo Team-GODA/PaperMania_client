@@ -8,7 +8,7 @@ public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
     [SerializeField]
-    private string BaseUrl;
+    private EndpointSO endPointSO;
     void Awake()
     {
         if (instance == null)
@@ -35,7 +35,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(BaseUrl + endpoint))
+        using (UnityWebRequest request = UnityWebRequest.Get(endPointSO.BaseUrl + endpoint))
         {
             request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
@@ -82,7 +82,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(endPointSO.BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;
             
