@@ -7,7 +7,6 @@ public class Target6Attack : MonoBehaviour
 
     public void Awake()
     {
-        InvokeRepeating("GetDmg", 0f, 0.01f);
         boxCol = GetComponent<BoxCollider2D>();
     }
 
