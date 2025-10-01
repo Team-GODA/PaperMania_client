@@ -11,6 +11,6 @@ public class CharacterAction : MonoBehaviour
     }
     void OnMouseUp()
     {
-        parent.DORotateQuaternion(Quaternion.Euler(90f, 0, 0), 0.5f).SetEase(Ease.OutBounce);
+        parent.DORotateQuaternion(Quaternion.Euler(90f, 0, 0), 1f).SetEase(Ease.OutBounce);
     }
 }
