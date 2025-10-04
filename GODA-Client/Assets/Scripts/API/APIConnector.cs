@@ -85,7 +85,64 @@ public class APIConnector : MonoBehaviour
         using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;
-            
+
+            if (!string.IsNullOrEmpty(jsonData))
+            {
+                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                request.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            }
+
+            else
+                request.uploadHandler = new UploadHandlerRaw(new byte[0]);
+
+            request.SetRequestHeader("Content-Type", "application/json");
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            if (needSession && PlayerPrefs.HasKey("sessionId"))
+                request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
+
+            yield return request.SendWebRequest();
+            Debug.Log(request.downloadHandler.text);
+
+            if (request.result == UnityWebRequest.Result.Success)
+            {
+                try
+                {
+                    T result = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+                    onSuccess?.Invoke(result);
+                }
+                catch (Exception e)
+                {
+                    onError?.Invoke("Json 변환 실패 : " + e.Message);
+                }
+            }
+            else
+            {
+                onError?.Invoke(request.error);
+            }
+        }
+    }
+
+    /// <summary>
+    /// API 통신 중 PATCh를 수행하는 메서드입니다.
+    /// </summary>
+    /// <typeparam name="T">반환 클래스 타입</typeparam>
+    /// <param name="endPoint">엔드포인트</param>
+    /// <param name="onSuccess">성공시 실행할 엑션</param>
+    /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
+    /// <param name="needSession">세션 필요 여부(기본값 : false)</param>
+    public void Patch<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError, bool needSession = false)
+    {
+        string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
+        StartCoroutine(PatchRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
+    }
+
+    private IEnumerator PatchRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
+    {
+        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "PATCH"))
+        {
+            request.timeout = 10;
+
             if (!string.IsNullOrEmpty(jsonData))
             {
                 byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
