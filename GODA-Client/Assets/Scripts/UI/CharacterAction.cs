@@ -11,6 +11,7 @@ public class CharacterAction : MonoBehaviour
     }
     void OnMouseUp()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         parent.DORotateQuaternion(Quaternion.Euler(90f, 0, 0), 1f).SetEase(Ease.OutBounce);
     }
 }
