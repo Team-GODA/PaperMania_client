@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7647d4cf6c1d2144bb698c80811ca6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BaseUrl: http://gsmsv-1.yujun.kr:29859/api/v3/
+  BaseUrl: http://gsmsv-1.yujun.kr:29489/api/v3/

@@ -7,6 +7,7 @@ public class LoginPanel : MonoBehaviour
     public InputField IDField;
     public InputField PWField;
     public UnityEvent LoginEvent;
+    public UnityEvent LogoutEvent;
     public EndpointSO endPoint;
 
     private bool isNull()
@@ -47,5 +48,18 @@ public class LoginPanel : MonoBehaviour
         {
             Debug.Log(log);
         });
+    }
+
+    public void Logout()
+    {
+        APIConnector.instance.Post<Response<string>>(endPoint.LogoutEndPoint, null, (data) =>
+        {
+            Debug.Log("로그아웃 되었습니다.");
+            PlayerPrefs.DeleteKey("sessionId");
+            PlayerPrefs.DeleteKey("Id");
+
+            LogoutEvent?.Invoke();
+
+        }, null, true);
     }
 }

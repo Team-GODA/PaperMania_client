@@ -1071,7 +1071,6 @@ GameObject:
   - component: {fileID: 952149694}
   - component: {fileID: 952149696}
   - component: {fileID: 952149695}
-  - component: {fileID: 952149697}
   m_Layer: 5
   m_Name: Login
   m_TagString: Untagged
@@ -1141,36 +1140,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952149693}
   m_CullTransparentMesh: 1
---- !u!114 &952149697
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952149693}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d3e8e0af0282945a17f172e1c8653f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IDField: {fileID: 1683449918}
-  PWField: {fileID: 51552157}
-  LoginEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 952149693}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  endPoint: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &953287133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,6 +2008,7 @@ GameObject:
   - component: {fileID: 1316319969}
   - component: {fileID: 1316319968}
   - component: {fileID: 1316319967}
+  - component: {fileID: 1316319971}
   m_Layer: 5
   m_Name: UICanvas
   m_TagString: Untagged
@@ -2130,6 +2100,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1316319971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316319966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d3e8e0af0282945a17f172e1c8653f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IDField: {fileID: 1683449918}
+  PWField: {fileID: 51552157}
+  LoginEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 952149693}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  LogoutEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 952149693}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  endPoint: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &1317420887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2315,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 952149697}
+      - m_Target: {fileID: 1316319971}
         m_TargetAssemblyTypeName: LoginPanel, Assembly-CSharp
         m_MethodName: Login
         m_Mode: 1
@@ -3015,7 +3030,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1698296543}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1316319971}
+        m_TargetAssemblyTypeName: LoginPanel, Assembly-CSharp
+        m_MethodName: Logout
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1698296543
 MonoBehaviour:
   m_ObjectHideFlags: 0

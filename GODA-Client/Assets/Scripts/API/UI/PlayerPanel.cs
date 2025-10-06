@@ -5,6 +5,8 @@ public class PlayerPanel : MonoBehaviour
 {
     public UnityEvent LogoutEvent;
     public EndpointSO endPoint;
+
+    //추후 삭제하기
     public void Logout()
     {
         APIConnector.instance.Post<Response<string>>(endPoint.LogoutEndPoint, null, (data) =>
