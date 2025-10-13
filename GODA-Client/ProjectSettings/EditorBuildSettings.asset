@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Mockup/StartScene.unity
+    guid: 12cedb9576922e14a93e7cb8f2e2e5cf
+  - enabled: 1
+    path: Assets/Scenes/Mockup/LoadingScene.unity
+    guid: e5e07396e1822284497353d757a73a7a
+  - enabled: 1
+    path: Assets/Scenes/Mockup/MainScene.unity
+    guid: 922740b80575bc74497ded7991e44f33
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: db097d3eb8c6f284e84a5b07cd804697, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
