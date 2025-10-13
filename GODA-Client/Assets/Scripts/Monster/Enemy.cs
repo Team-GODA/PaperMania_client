@@ -1,5 +1,6 @@
 using UnityEngine;
 
+public enum Row { Front, Mid, Back }
 
 public class Enemy : MonoBehaviour
 {
