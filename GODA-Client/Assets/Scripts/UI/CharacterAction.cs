@@ -24,6 +24,6 @@ public class CharacterAction : MonoBehaviour
 
     public void LoadScene()
     {
-        LoadSceneManager.Instance.LoadScene("MainScene");
+        LoadSceneManager.Instance.MainLoadScene("MainScene");
     }
 }

@@ -8,7 +8,7 @@ public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
     [SerializeField]
-    private string BaseUrl;
+    private EndpointSO endPointSO;
     void Awake()
     {
         if (instance == null)
@@ -21,6 +21,7 @@ public class APIConnector : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     /// <summary>
     /// API 통신 중 Get 메서드를 실행하는 코드입니다.
     /// </summary>
@@ -33,9 +34,23 @@ public class APIConnector : MonoBehaviour
         StartCoroutine(GetRequestGeneric(endPoint, onSuccess, onError, needSession));
     }
 
+    /// <summary>
+    /// 로딩 시 사용하는 코루틴입니다.
+    /// </summary>
+    /// <typeparam name="T">반환 클래스</typeparam>
+    /// <param name="endPoint">엔드포인트</param>
+    /// <param name="onSuccess">성공시 실행할 엑션</param>
+    /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
+    /// <param name="needSession">세션 필요 여부</param>
+    /// <returns></returns>
+    public IEnumerator GetCoroutine<T>(string endpoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
+    {
+        yield return GetRequestGeneric<T>(endpoint, onSuccess, onError, needSession);
+    }
+
     private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(BaseUrl + endpoint))
+        using (UnityWebRequest request = UnityWebRequest.Get(endPointSO.BaseUrl + endpoint))
         {
             request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
@@ -82,10 +97,10 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(endPointSO.BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;
-            
+
             if (!string.IsNullOrEmpty(jsonData))
             {
                 byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonData);
@@ -122,4 +137,7 @@ public class APIConnector : MonoBehaviour
             }
         }
     }
+    
+
+
 }

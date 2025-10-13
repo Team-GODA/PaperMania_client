@@ -70,3 +70,10 @@ public class Response<T>
     [JsonProperty("data")]
     public T Data { get; set; }
 }
+
+public class PlayerData
+{
+    public string Name;
+    public int Level;
+    public int Exp;
+}

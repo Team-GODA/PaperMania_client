@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -57,11 +58,16 @@ public class LoadSceneManager : MonoBehaviour
     private bool apiLoaded = false;
 
 
-    public void LoadScene(string sceneName)
+    public void MainLoadScene(string sceneName)
     {
         gameObject.SetActive(true);
         SceneManager.sceneLoaded += OnSceneLoaded;
         loadSceneName = sceneName;
+
+        sceneLoaded = false;
+        apiLoaded = false;
+        sceneProgress = 0f;
+        apiProgress = 0f;
 
         StartCoroutine(loadSceneProcess());
     }
@@ -69,28 +75,61 @@ public class LoadSceneManager : MonoBehaviour
     {
         loadingBar.value = 0f;
 
+        StartCoroutine(sceneLoadCoroutine());
+        StartCoroutine(apiLoadCoroutine());
+
+        while(!apiLoaded || !sceneLoaded)
+        {
+            loadingBar.value = (sceneProgress + apiProgress) / 2f;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator sceneLoadCoroutine()
+    {
         AsyncOperation op = SceneManager.LoadSceneAsync(loadSceneName);
         op.allowSceneActivation = false;
 
         float timer = 0f;
+
         while (!op.isDone)
         {
             yield return null;
             if (op.progress < 0.9f)
             {
-                loadingBar.value = op.progress;
+                sceneProgress = op.progress;
             }
             else
             {
                 timer += Time.unscaledDeltaTime;
-                loadingBar.value = Mathf.Lerp(0.9f, 1f, timer);
-                if (loadingBar.value >= 1f)
+                sceneProgress = Mathf.Lerp(0.9f, 1f, timer);
+                if(sceneProgress >= 1f)
                 {
                     op.allowSceneActivation = true;
+                    sceneLoaded = true;
                     yield break;
                 }
             }
         }
+    }
+
+    IEnumerator apiLoadCoroutine()
+    {
+        yield return APIManager.instance.RequestPlayerLevel();
+
+        apiProgress = 0.3f;
+
+        yield return APIManager.instance.RequesetPlayerName();
+
+        apiProgress = 0.6f;
+
+        yield return APIManager.instance.RequestPlayerExp();
+
+        apiProgress = 1f;
+
+        apiLoaded = true;
+        yield break;
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -102,8 +141,5 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
-    public void OnAPILoadComplete()
-    {
-        
-    }
+
 }
