@@ -21,4 +21,18 @@ public class Enemy : MonoBehaviour
     {
         nowHP = maxHP;
     }
+
+    public void TakeDamage(float damage)
+    {
+        if (shield >= damage)
+        {
+            shield -= damage;
+        }
+        else
+        {
+            float leftDmg = damage - shield;
+            shield = 0;
+            nowHP -= leftDmg;
+        }
+    }
 }
