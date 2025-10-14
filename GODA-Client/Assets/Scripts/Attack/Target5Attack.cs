@@ -20,7 +20,7 @@ public class Target5Attack : MonoBehaviour
     {
         if (collision.transform.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            enemy.nowHP -= attackDmg;
+            enemy.TakeDamage(attackDmg);
         }
         else return;
     }
