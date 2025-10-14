@@ -840,6 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 1
   die: 0
 --- !u!50 &312294245
 Rigidbody2D:
@@ -1244,6 +1245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 1
   die: 0
 --- !u!50 &465195767
 Rigidbody2D:
@@ -1501,6 +1503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 1
   die: 0
 --- !u!50 &620099036
 Rigidbody2D:
@@ -2083,6 +2086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 1
   die: 0
 --- !u!50 &1198461933
 Rigidbody2D:
@@ -2761,6 +2765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 0
   die: 0
 --- !u!50 &1619475683
 Rigidbody2D:
@@ -3351,6 +3356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 0
   nowHP: 0
+  row: 1
   die: 0
 --- !u!50 &1864019769
 Rigidbody2D:
