@@ -4,6 +4,7 @@ public enum Row { Front, Mid, Back }
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Status")]
     public float maxHP;
     public float nowHP; //Ã¼·Â
     public float shield;
@@ -14,7 +15,7 @@ public class Enemy : MonoBehaviour
     public float attackDmg => baseAttack * attackMultiplier;
 
     [SerializeField] private Row row = Row.Mid;
-    public Row RowPosition => row;
+    public Row rowPosition => row;
 
     protected virtual void Start()
     {
