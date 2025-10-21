@@ -3,11 +3,21 @@ using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public Text t1, t2, t3;
-    void Update()
+    [SerializeField]
+    private Text playerName, playerLevel;
+
+    [SerializeField]
+    private Image playerExp;
+
+	private void Start()
+	{
+        UpdateUI();
+	}
+
+    void UpdateUI()
     {
-        t1.text = PlayerDataManager.Instance._PlayerData.Name;
-        t2.text = PlayerDataManager.Instance._PlayerData.Level.ToString();
-        t3.text = PlayerDataManager.Instance._PlayerData.Exp.ToString();
+        playerName.text = PlayerDataManager.Instance._PlayerData.Name;
+        playerLevel.text = PlayerDataManager.Instance._PlayerData.Level.ToString();
+        playerExp.fillAmount = PlayerDataManager.Instance._PlayerData.Exp / PlayerDataManager.Instance._PlayerData.MaxExp;
     }
 }
