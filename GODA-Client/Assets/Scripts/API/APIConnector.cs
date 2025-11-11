@@ -8,7 +8,7 @@ public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
     [SerializeField]
-    private string baseUrl;
+    private EndpointSO endpointSO;
     void Awake()
     {
         if (instance == null)
@@ -35,7 +35,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator getRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(baseUrl + endpoint))
+        using (UnityWebRequest request = UnityWebRequest.Get(endpointSO.BaseUrl + endpoint))
         {
             request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
@@ -82,7 +82,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator postRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(endpointSO.BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;
 
@@ -139,7 +139,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator patchRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "PATCH"))
+        using (UnityWebRequest request = new UnityWebRequest(endpointSO.BaseUrl + endpoint, "PATCH"))
         {
             request.timeout = 10;
 
@@ -195,7 +195,7 @@ public class APIConnector : MonoBehaviour
 
 	private IEnumerator deleteRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession)
 	{
-        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "DELETE"))
+        using (UnityWebRequest request = new UnityWebRequest(endpointSO.BaseUrl + endpoint, "DELETE"))
 		{
 			request.timeout = 10;
 			request.SetRequestHeader("Content-Type", "application/json");
