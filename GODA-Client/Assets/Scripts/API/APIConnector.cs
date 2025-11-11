@@ -8,7 +8,7 @@ public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
     [SerializeField]
-    private string BaseUrl;
+    private string baseUrl;
     void Awake()
     {
         if (instance == null)
@@ -30,12 +30,12 @@ public class APIConnector : MonoBehaviour
     /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
     public void Get<T>(string endPoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
-        StartCoroutine(GetRequestGeneric(endPoint, onSuccess, onError, needSession));
+        StartCoroutine(getRequestGeneric(endPoint, onSuccess, onError, needSession));
     }
 
-    private IEnumerator GetRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
+    private IEnumerator getRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
-        using (UnityWebRequest request = UnityWebRequest.Get(BaseUrl + endpoint))
+        using (UnityWebRequest request = UnityWebRequest.Get(baseUrl + endpoint))
         {
             request.timeout = 10;
             request.SetRequestHeader("Content-Type", "application/json");
@@ -77,12 +77,12 @@ public class APIConnector : MonoBehaviour
     public void Post<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
         string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
-        StartCoroutine(PostRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
+        StartCoroutine(postRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
     }
 
-    private IEnumerator PostRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
+    private IEnumerator postRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "POST"))
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "POST"))
         {
             request.timeout = 10;
 
@@ -124,7 +124,7 @@ public class APIConnector : MonoBehaviour
     }
 
     /// <summary>
-    /// API 통신 중 PATCh를 수행하는 메서드입니다.
+    /// API 통신 중 PATCH를 수행하는 메서드입니다.
     /// </summary>
     /// <typeparam name="T">반환 클래스 타입</typeparam>
     /// <param name="endPoint">엔드포인트</param>
@@ -134,12 +134,12 @@ public class APIConnector : MonoBehaviour
     public void Patch<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
         string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
-        StartCoroutine(PatchRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
+        StartCoroutine(patchRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
     }
 
-    private IEnumerator PatchRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
+    private IEnumerator patchRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
-        using (UnityWebRequest request = new UnityWebRequest(BaseUrl + endpoint, "PATCH"))
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "PATCH"))
         {
             request.timeout = 10;
 
@@ -179,4 +179,50 @@ public class APIConnector : MonoBehaviour
             }
         }
     }
+
+	/// <summary>
+	/// API 통신 중 PATCH를 수행하는 메서드입니다.
+	/// </summary>
+	/// <typeparam name="T">반환 클래스 타입</typeparam>
+	/// <param name="endPoint">엔드포인트</param>
+	/// <param name="onSuccess">성공시 실행할 엑션</param>
+	/// <param name="onError">에러가 나타날 시 실행할 엑션</param>
+	/// <param name="needSession">세션 필요 여부(기본값 : false)</param>
+	public void Delete<T>(string endPoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
+	{
+		StartCoroutine(deleteRequestGeneric(endPoint, onSuccess, onError, needSession));
+	}
+
+	private IEnumerator deleteRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession)
+	{
+        using (UnityWebRequest request = new UnityWebRequest(baseUrl + endpoint, "DELETE"))
+		{
+			request.timeout = 10;
+			request.SetRequestHeader("Content-Type", "application/json");
+
+			if (needSession && PlayerPrefs.HasKey("sessionId"))
+				request.SetRequestHeader("Session-Id", PlayerPrefs.GetString("sessionId"));
+
+
+			yield return request.SendWebRequest();
+			Debug.Log(request.downloadHandler.text);
+
+			if (request.result == UnityWebRequest.Result.Success)
+			{
+				try
+				{
+					T result = JsonConvert.DeserializeObject<T>(request.downloadHandler.text);
+					onSuccess?.Invoke(result);
+				}
+				catch (Exception e)
+				{
+					onError?.Invoke("Json 변환 실패 : " + e.Message);
+				}
+			}
+			else
+			{
+				onError?.Invoke(request.error);
+			}
+		}
+	}
 }
