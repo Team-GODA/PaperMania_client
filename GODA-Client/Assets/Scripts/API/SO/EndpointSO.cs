@@ -9,13 +9,16 @@ public class EndpointSO : ScriptableObject
     [field: SerializeField]
     public string AuthEndPoint { get; set; } = "auth/";
     [field: SerializeField]
-    public string LoginEndPoint { get; set; } = "auth/login";
+    public string LoginEndPoint { get; set; } = "login";
     [field: SerializeField]
-    public string RegisterEndPoint { get; set; } = "auth/register";
+    public string RegisterEndPoint { get; set; } = "register";
     [field: SerializeField]
-    public string LogoutEndPoint { get; set; } = "auth/logout";
+    public string LogoutEndPoint { get; set; } = "logout";
+    [Header("Data")]
     [field: SerializeField]
-    public string PlayerNameEndPoint { get; set; } = "data/name";
+    public string DataEndPoint { get; set; } = "data/";
     [field: SerializeField]
-    public string PlayerDataEndPoint { get; set; } = "data/player";
+    public string PlayerNameEndPoint { get; set; } = "name";
+    [field: SerializeField]
+    public string PlayerDataEndPoint { get; set; } = "player";
 }
