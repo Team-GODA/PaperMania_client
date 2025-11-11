@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public bl_Joystick joyStick;
+
     [Header("Status")]
     public float maxHP;
     public float nowHP; //Ã¼·Â
@@ -13,12 +15,23 @@ public class Player : MonoBehaviour
     public float attackDmg => baseAttack * attackMultiplier;
 
     public float speed;
-    public float slowDebuff;
+    public float slowDebuff = 1;
     public float moveSpeed => speed * slowDebuff;
 
     protected virtual void Start()
     {
         nowHP = maxHP;
+    }
+
+    private void Update()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        Vector3 dir = new Vector3(joyStick.Horizontal, joyStick.Vertical, 0).normalized;
+        transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
     public void TakeDamage(float damage)
