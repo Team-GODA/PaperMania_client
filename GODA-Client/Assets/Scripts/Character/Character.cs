@@ -12,7 +12,9 @@ public class Character : MonoBehaviour
     public float attackMultiplier;
     public float attackDmg => baseAttack * attackMultiplier;
 
-
+    public float speed;
+    public float slowDebuff;
+    public float moveSpeed => speed * slowDebuff;
 
     protected virtual void Start()
     {
