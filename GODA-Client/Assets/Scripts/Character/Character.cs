@@ -12,8 +12,7 @@ public class Character : MonoBehaviour
     public float attackMultiplier;
     public float attackDmg => baseAttack * attackMultiplier;
 
-    [SerializeField] private Row row = Row.Mid;
-    public Row rowPosition => row;
+
 
     protected virtual void Start()
     {
