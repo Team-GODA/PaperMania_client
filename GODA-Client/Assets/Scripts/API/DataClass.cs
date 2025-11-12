@@ -19,8 +19,8 @@ public class PlayerName
 [Serializable]
 public class LoginResponse
 {
-    public int id;
     public string sessionId;
+    public bool isNewAccount;
 }
 
 [Serializable]
@@ -71,10 +71,8 @@ public class Response<T>
     public T Data { get; set; }
 }
 
-public class PlayerData
+public class UserData
 {
-    public string Name;
-    public int Level;
-    public int Exp;
-    public int MaxExp;
+    [JsonProperty("id")]
+    public int Id { get; set; }
 }

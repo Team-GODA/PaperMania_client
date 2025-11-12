@@ -4,12 +4,11 @@ using UnityEngine.Events;
 public class PlayerPanel : MonoBehaviour
 {
     public UnityEvent LogoutEvent;
-    public EndpointSO endPoint;
-
-    //추후 삭제하기
+    public EndpointSO endPointSO;
     public void Logout()
     {
-        APIConnector.instance.Post<Response<string>>(endPoint.LogoutEndPoint, null, (data) =>
+        string endpoint = endPointSO.AuthEndPoint + endPointSO.LogoutEndPoint;
+        APIConnector.instance.Post<Response<string>>(endpoint, null, (data) =>
         {
             Debug.Log("로그아웃 되었습니다.");
             PlayerPrefs.DeleteKey("sessionId");
@@ -22,7 +21,8 @@ public class PlayerPanel : MonoBehaviour
 
     public void GetName()
     {
-        APIConnector.instance.Get<Response<PlayerName>>(endPoint.PlayerNameEndPoint, (body) =>
+        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerNameEndPoint;
+        APIConnector.instance.Get<Response<PlayerName>>(endpoint, (body) =>
         {
             Debug.Log($"{body.Data.playerName} : {body.Data.id}");
         }, (log) =>

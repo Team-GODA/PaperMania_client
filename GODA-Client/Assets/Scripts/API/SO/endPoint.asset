@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseUrl>k__BackingField: http://gsmsv-1.yujun.kr:29489/api/v3/
   <AuthEndPoint>k__BackingField: auth/
-  <LoginEndPoint>k__BackingField: auth/login
-  <RegisterEndPoint>k__BackingField: auth/register
-  <LogoutEndPoint>k__BackingField: auth/logout
-  <PlayerNameEndPoint>k__BackingField: data/name
-  <PlayerLevelEndPoint>k__BackingField: data/level
-  <PlayerDataEndPoint>k__BackingField: data/player
+  <LoginEndPoint>k__BackingField: login
+  <RegisterEndPoint>k__BackingField: register
+  <LogoutEndPoint>k__BackingField: logout
+  <DataEndPoint>k__BackingField: data/
+  <PlayerNameEndPoint>k__BackingField: name
+  <PlayerDataEndPoint>k__BackingField: player

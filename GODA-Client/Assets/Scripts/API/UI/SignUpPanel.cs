@@ -9,7 +9,15 @@ public class SignUpPanel : MonoBehaviour
     public InputField PWField;
 
     public UnityEvent OnSuccessEvent;
-    public EndpointSO endPoint;
+    public EndpointSO endPointSO;
+
+    void OnEnable()
+    {
+        EmailField.text = "";
+        IDField.text = "";
+        PWField.text = "";
+    }
+
 
     public void SignUp()
     {
@@ -22,7 +30,9 @@ public class SignUpPanel : MonoBehaviour
                 password = PWField.text
             };
 
-            APIConnector.instance.Post<Response<string>>(endPoint.RegisterEndPoint, account, (body) =>
+            string endpoint = endPointSO.AuthEndPoint + endPointSO.RegisterEndPoint;
+
+            APIConnector.instance.Post<Response<UserData>>(endpoint, account, (body) =>
             {
                 Debug.Log($"{body.Message}");
                 OnSuccessEvent?.Invoke();

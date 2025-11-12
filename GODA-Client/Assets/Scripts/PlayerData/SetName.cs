@@ -1,23 +1,38 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class SetName : MonoBehaviour
+public class NameSet : MonoBehaviour
 {
     public InputField text;
-    public EndpointSO endpointSO;
+    public EndpointSO endPointSO;
+
+    public UnityEvent OnNameSet = new UnityEvent();
+
+    void OnEnable()
+    {
+        text.text = "";
+    }
+
 
     public void NameUpdate()
     {
-        int id = PlayerPrefs.GetInt("Id");
-
+        if (text.text.Length <= 0)
+        {
+            Debug.Log("이름 설정 실패 : 이름을 입력하지 않았습니다!");
+            return;
+        }
         Name newName = new Name
         {
             playerName = text.text
         };
 
-        APIConnector.instance.Post<Response<Name>>(endpointSO.PlayerDataEndPoint, newName, (user) =>
+        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerDataEndPoint;
+
+        APIConnector.instance.Post<Response<Name>>(endpoint, newName, (user) =>
         {
             Debug.Log("New Name : " + user.Data.playerName);
+            OnNameSet?.Invoke();
         }, (user) =>
         {
             Debug.Log(user);

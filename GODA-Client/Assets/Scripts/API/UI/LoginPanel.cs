@@ -7,8 +7,14 @@ public class LoginPanel : MonoBehaviour
     public InputField IDField;
     public InputField PWField;
     public UnityEvent LoginEvent;
-    public UnityEvent LogoutEvent;
-    public EndpointSO endPoint;
+    public UnityEvent NameSetEvent;
+    public EndpointSO endPointSO;
+
+    void OnEnable()
+    {
+        IDField.text = "";
+        PWField.text = "";
+    }
 
     private bool isNull()
     {
@@ -36,14 +42,16 @@ public class LoginPanel : MonoBehaviour
             password = PWField.text
         };
 
-        APIConnector.instance.Post<Response<LoginResponse>>(endPoint.LoginEndPoint, body, (user) =>
+        string endpoint = endPointSO.AuthEndPoint + endPointSO.LoginEndPoint;
+
+        APIConnector.instance.Post<Response<LoginResponse>>(endpoint, body, (user) =>
         {
             Debug.Log($"{user.Message} : {user.Data.sessionId}");
+            Debug.Log($"New Account ? : {user.Data.isNewAccount}");
             PlayerPrefs.SetString("sessionId", user.Data.sessionId);
-            Debug.Log(user.Data.id);
-            PlayerPrefs.SetInt("Id", user.Data.id);
 
-            LoginEvent?.Invoke();
+            if (user.Data.isNewAccount) NameSetEvent?.Invoke();
+            else LoginEvent?.Invoke();
         }, (log) =>
         {
             Debug.Log(log);
