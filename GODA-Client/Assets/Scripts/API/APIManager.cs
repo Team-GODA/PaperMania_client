@@ -38,7 +38,7 @@ public class APIManager : MonoBehaviour
     public IEnumerator RequestPlayerLevel()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
-            endpoint: _EndPointSO.BaseUrl + _EndPointSO.PlayerLevelEndPoint,
+            endpoint: _EndPointSO.BaseUrl + _EndPointSO.DataEndPoint + _EndPointSO.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int level = response.Data.level;
@@ -53,7 +53,7 @@ public class APIManager : MonoBehaviour
     public IEnumerator RequestPlayerExp()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
-            endpoint: _EndPointSO.BaseUrl + _EndPointSO.PlayerLevelEndPoint,
+            endpoint: _EndPointSO.BaseUrl + _EndPointSO.DataEndPoint + _EndPointSO.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int exp = response.Data.exp;

@@ -21,4 +21,6 @@ public class EndpointSO : ScriptableObject
     public string PlayerNameEndPoint { get; set; } = "name";
     [field: SerializeField]
     public string PlayerDataEndPoint { get; set; } = "player";
+    [field: SerializeField]
+    public string PlayerLevelEndPoint { get; set; } = "level";
 }
