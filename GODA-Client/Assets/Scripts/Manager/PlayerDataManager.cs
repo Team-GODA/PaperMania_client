@@ -14,7 +14,7 @@ public class PlayerDataManager
             return instance;
         }
     }
-    public PlayerData _PlayerData = new PlayerData
+    private PlayerData playerData = new PlayerData
     {
         Name = "",
         Level = 0,
@@ -23,13 +23,13 @@ public class PlayerDataManager
 
     public void SetPlayerData(PlayerData playerData)
     {
-        _PlayerData = playerData;
+        this.playerData = playerData;
         Debug.Log("조회 후 데이터 적용 성공!");
     }
 
-    public void SetPlayerName(string name) => _PlayerData.Name = name;
+    public void SetPlayerName(string name) => playerData.Name = name;
 
-    public void SetPlayerLevel(int level) => _PlayerData.Level = level;
+    public void SetPlayerLevel(int level) => playerData.Level = level;
 
-    public void SetPlayerExp(int exp) => _PlayerData.Exp = exp;
+    public void SetPlayerExp(int exp) => playerData.Exp = exp;
 }

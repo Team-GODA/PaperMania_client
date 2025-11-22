@@ -8,7 +8,7 @@ public class LoginPanel : MonoBehaviour
     public InputField PWField;
     public UnityEvent LoginEvent;
     public UnityEvent NameSetEvent;
-    public EndpointSO endPointSO;
+    public EndpointSO EndPoint;
 
     void OnEnable()
     {
@@ -42,7 +42,7 @@ public class LoginPanel : MonoBehaviour
             password = PWField.text
         };
 
-        string endpoint = endPointSO.AuthEndPoint + endPointSO.LoginEndPoint;
+        string endpoint = EndPoint.AuthEndPoint + EndPoint.LoginEndPoint;
 
         APIConnector.instance.Post<Response<LoginResponse>>(endpoint, body, (user) =>
         {
@@ -60,7 +60,7 @@ public class LoginPanel : MonoBehaviour
 
     public void Logout()
     {
-        APIConnector.instance.Post<Response<string>>(endPointSO.LogoutEndPoint, null, (data) =>
+        APIConnector.instance.Post<Response<string>>(EndPoint.LogoutEndPoint, null, (data) =>
         {
             Debug.Log("로그아웃 되었습니다.");
             PlayerPrefs.DeleteKey("sessionId");

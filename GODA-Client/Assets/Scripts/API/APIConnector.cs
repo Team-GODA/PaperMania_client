@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 
+// API 메서드를 실행하고, 응답을 반환하는 클래스입니다.
 public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;
@@ -45,7 +46,7 @@ public class APIConnector : MonoBehaviour
     /// <returns></returns>
     public IEnumerator GetCoroutine<T>(string endpoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
-        yield return etRequestGeneric<T>(endpoint, onSuccess, onError, needSession);
+        yield return getRequestGeneric<T>(endpoint, onSuccess, onError, needSession);
     }
 
     private IEnumerator getRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
