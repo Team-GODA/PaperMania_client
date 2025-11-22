@@ -28,7 +28,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
-  m_Loaders: []
+  m_Loaders:
+  - {fileID: 11400000, guid: 01a80b89d876e5d44aff5bed730a1e0f, type: 2}
+  - {fileID: 11400000, guid: ca60559a335bcb14884809e8e38756bc, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 2
