@@ -2259,7 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7647d4cf6c1d2144bb698c80811ca6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endPointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
+  endpointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &825892953
 GameObject:
   m_ObjectHideFlags: 0

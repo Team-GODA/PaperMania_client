@@ -4,8 +4,8 @@ using UnityEngine;
 public class EndpointSO : ScriptableObject
 {
     [field: SerializeField]
-    public string BaseUrl { get; set; }
-    [Header("Auth")]
+    public string BaseUrl { get; set; } = "http://gsmsv-1.yujun.kr:29859/api/v3/";
+
     [field: SerializeField]
     public string AuthEndPoint { get; set; } = "auth/";
     [field: SerializeField]
