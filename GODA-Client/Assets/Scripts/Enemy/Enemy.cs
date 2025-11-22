@@ -3,35 +3,35 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Status")]
-    public float maxHP;
-    public float nowHP; //체력
-    public float shield;
-    public float totalHP => nowHP + shield; //체력과 쉴드 양을 합친 총 체력
+    public float MaxHP;
+    public float NowHP; //체력
+    public float Shield;
+    public float TotalHP => NowHP + Shield; //체력과 쉴드 양을 합친 총 체력
 
-    public float baseAttack;
-    public float attackMultiplier;
-    public float attackDmg => baseAttack * attackMultiplier;
+    public float BaseAttack;
+    public float AttackMultiplier;
+    public float AttackDmg => BaseAttack * AttackMultiplier;
 
-    public float speed;
-    public float slowDebuff = 1;
-    public float moveSpeed => speed * slowDebuff;
+    public float Speed;
+    public float SlowDebuff = 1;
+    public float MoveSpeed => Speed * SlowDebuff;
 
     protected virtual void Start()
     {
-        nowHP = maxHP;
+        NowHP = MaxHP;
     }
 
     public void TakeDamage(float damage)
     {
-        if (shield >= damage)
+        if (Shield >= damage)
         {
-            shield -= damage;
+            Shield -= damage;
         }
         else
         {
-            float leftDmg = damage - shield;
-            shield = 0;
-            nowHP -= leftDmg;
+            float leftDmg = damage - Shield;
+            Shield = 0;
+            NowHP -= leftDmg;
         }
     }
 }

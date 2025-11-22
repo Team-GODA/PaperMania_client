@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FollowEnemy : Enemy
 {
-    public bool die;
+    public bool Die;
 
     public GameObject Player;
 
     protected override void Start()
     {
-        maxHP = 100;
+        MaxHP = 100;
         base.Start();
     }
 
@@ -20,13 +20,13 @@ public class FollowEnemy : Enemy
 
     private void Update()
     {
-        if (nowHP <= 0)
+        if (NowHP <= 0)
         {
-            die = true;
+            Die = true;
         }
         else
         {
-            die = false;
+            Die = false;
         }
 
         Follow();
@@ -35,7 +35,7 @@ public class FollowEnemy : Enemy
     private void Follow()
     {
         Vector3 dir = (Player.transform.position - transform.position).normalized;
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        transform.position += dir * MoveSpeed * Time.deltaTime;
     }
 
 }
