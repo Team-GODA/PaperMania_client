@@ -1936,7 +1936,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  endPointSO: {fileID: 0}
+  endPointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &952149693
 GameObject:
   m_ObjectHideFlags: 0
