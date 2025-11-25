@@ -5,33 +5,34 @@ public class Player : MonoBehaviour
 {
     public bl_Joystick JoyStick;
 
+    [Header("Status")]
     public float MaxHp;
     public float NowHp;
     public float Shield;
     public float ToralHp => NowHp + Shield;
 
+    [Header("Attack")]
     private float baseAttack;
     public float AttackMultiplier;
     public float AttackDmg => baseAttack * AttackMultiplier;
+    public float AttackRange;
+    public float AttackCool;
+    public GameObject Target;
+    public string TargetTag = "Enemy";
+    [SerializeField] private LayerMask layer;
+    private Collider2D[] overlapResults = new Collider2D[32];
 
+    [Header("Movement")]
     public float Speed;
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
-    public float AttackRange;
-    public float AttackCool;
-
-    public GameObject Target;
-    public string TargetTag = "Enemy";
-    [SerializeField] private LayerMask layer;
-
-    private Collider2D[] overlapResults = new Collider2D[32];
-
+    //´ë½¬
     public float DashDistance = 3f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
 
-    private bool isDashing = false;
+    [SerializeField] private bool isDashing = false;
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
