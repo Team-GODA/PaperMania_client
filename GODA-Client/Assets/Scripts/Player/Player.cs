@@ -119,9 +119,8 @@ public class Player : MonoBehaviour
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
         while (elapsed < DashDuration)
         {
-            float dt = Time.deltaTime;
-            transform.position += (Vector3)(dir * dashSpeed * dt);
-            elapsed += dt;
+            transform.position += (Vector3)(dir * dashSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
             yield return null;
         }
         IsDashing = false;
