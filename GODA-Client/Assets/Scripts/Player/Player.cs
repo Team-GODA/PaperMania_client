@@ -1,14 +1,14 @@
 using UnityEngine;
+using System.Collections;
 
 public class Player : MonoBehaviour
 {
     public bl_Joystick JoyStick;
 
-    [Header("Status")]
     public float MaxHp;
-    public float NowHp; //체력
+    public float NowHp;
     public float Shield;
-    public float ToralHp => NowHp + Shield; //체력과 쉴드 양을 합친 총 체력
+    public float ToralHp => NowHp + Shield;
 
     private float baseAttack;
     public float AttackMultiplier;
@@ -18,16 +18,22 @@ public class Player : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
-    [Header("Attack")]
-    public float AttackRange; //공격범위(감지범위)
-    public float AttackCool; //공격 쿨타임
+    public float AttackRange;
+    public float AttackCool;
 
-    [Header("Targeting")]
-    public GameObject Target; 
-    public string TargetTag = "Enemy"; 
+    public GameObject Target;
+    public string TargetTag = "Enemy";
     [SerializeField] private LayerMask layer;
 
     private Collider2D[] overlapResults = new Collider2D[32];
+
+    public float DashDistance = 3f;
+    public float DashDuration = 0.2f;
+    public float DashCooldown = 1f;
+
+    private bool isDashing = false;
+    private float dashCooldownTimer = 0f;
+    private Vector2 lastMoveDirection = Vector2.right;
 
     protected virtual void Start()
     {
@@ -36,13 +42,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space)) Dash();
+
         Move();
         Targeting();
     }
 
     private void Move()
     {
-        Vector3 dir = new Vector3(JoyStick.Horizontal, JoyStick.Vertical, 0).normalized;
+        if (isDashing) return;
+
+        Vector3 dir3 = new Vector3(JoyStick.Horizontal, JoyStick.Vertical, 0f);
+        Vector3 dir = dir3.normalized;
+        if (dir.sqrMagnitude > 0.0001f)
+        {
+            lastMoveDirection = new Vector2(dir.x, dir.y).normalized;
+        }
         transform.position += dir * MoveSpeed * Time.deltaTime;
     }
 
@@ -59,11 +76,8 @@ public class Player : MonoBehaviour
             var col = overlapResults[i];
             if (col == null) continue;
             GameObject go = col.gameObject;
-
             if (go == this.gameObject) continue;
-
             if (!string.IsNullOrEmpty(TargetTag) && !go.CompareTag(TargetTag)) continue;
-
             float sqr = ((Vector2)go.transform.position - myPos).sqrMagnitude;
             if (sqr < nearestSqr)
             {
@@ -73,6 +87,45 @@ public class Player : MonoBehaviour
         }
 
         Target = nearest;
+    }
+
+    public void Dash()
+    {
+        if (isDashing) return;
+        if (dashCooldownTimer > 0f) return;
+
+        Vector2 input = new Vector2(JoyStick.Horizontal, JoyStick.Vertical);
+        Vector2 dashDir;
+        if (input.sqrMagnitude > 0.0001f)
+        {
+            dashDir = input.normalized;
+        }
+        else if (lastMoveDirection.sqrMagnitude > 0.0001f)
+        {
+            dashDir = lastMoveDirection;
+        }
+        else
+        {
+            dashDir = Vector2.up;
+        }
+
+        StartCoroutine(DashCoroutine(dashDir));
+    }
+
+    private IEnumerator DashCoroutine(Vector2 dir)
+    {
+        isDashing = true;
+        dashCooldownTimer = DashCooldown;
+        float elapsed = 0f;
+        float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
+        while (elapsed < DashDuration)
+        {
+            float dt = Time.deltaTime;
+            transform.position += (Vector3)(dir * dashSpeed * dt);
+            elapsed += dt;
+            yield return null;
+        }
+        isDashing = false;
     }
 
     public void TakeDamage(float damage)
