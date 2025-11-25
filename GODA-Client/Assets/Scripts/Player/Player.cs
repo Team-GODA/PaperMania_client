@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
 
-    [SerializeField] private bool isDashing = false;
+    [SerializeField] public bool IsDashing = false;
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        if (isDashing) return;
+        if (IsDashing) return;
 
         Vector3 dir3 = new Vector3(JoyStick.Horizontal, JoyStick.Vertical, 0f);
         Vector3 dir = dir3.normalized;
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
 
     public void Dash()
     {
-        if (isDashing) return;
+        if (IsDashing) return;
         if (dashCooldownTimer > 0f) return;
 
         Vector2 input = new Vector2(JoyStick.Horizontal, JoyStick.Vertical);
@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator DashCoroutine(Vector2 dir)
     {
-        isDashing = true;
+        IsDashing = true;
         dashCooldownTimer = DashCooldown;
         float elapsed = 0f;
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
@@ -124,7 +124,7 @@ public class Player : MonoBehaviour
             elapsed += dt;
             yield return null;
         }
-        isDashing = false;
+        IsDashing = false;
     }
 
     public void TakeDamage(float damage)
