@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
 
-    [SerializeField] public bool IsDashing = false;
+    public bool IsDashing = false;
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
