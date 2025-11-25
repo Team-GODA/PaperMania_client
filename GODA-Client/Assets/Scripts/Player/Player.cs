@@ -44,8 +44,6 @@ public class Player : MonoBehaviour
     {
         if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space)) Dash();
-
         Move();
         Targeting();
     }
