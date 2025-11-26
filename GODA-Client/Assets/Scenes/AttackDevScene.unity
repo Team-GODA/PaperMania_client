@@ -221,7 +221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JoyStick: {fileID: 311516581}
-  col: {fileID: 85566644}
   MaxHp: 0
   NowHp: 0
   Shield: 0
@@ -238,7 +237,7 @@ MonoBehaviour:
   DashDistance: 3
   DashDuration: 0.2
   DashCooldown: 1
-  isDashing: 0
+  IsDashing: 0
 --- !u!61 &85566644
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -595,7 +594,7 @@ MonoBehaviour:
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
   m_Cameras: []
-  m_RendererIndex: -1
+  m_RendererIndex: 1
   m_VolumeLayerMask:
     serializedVersion: 2
     m_Bits: 1
