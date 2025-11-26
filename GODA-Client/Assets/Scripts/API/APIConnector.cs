@@ -45,7 +45,7 @@ public class APIConnector : MonoBehaviour
     /// <returns></returns>
     public IEnumerator GetCoroutine<T>(string endpoint, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
-        yield return etRequestGeneric<T>(endpoint, onSuccess, onError, needSession);
+        yield return getRequestGeneric<T>(endpoint, onSuccess, onError, needSession);
     }
 
     private IEnumerator getRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
