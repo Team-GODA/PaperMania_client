@@ -76,3 +76,11 @@ public class UserData
     [JsonProperty("id")]
     public int Id { get; set; }
 }
+
+public class PlayerData
+{
+    public string Name;
+    public int Level;
+    public int Exp;
+    public int MaxExp;
+}

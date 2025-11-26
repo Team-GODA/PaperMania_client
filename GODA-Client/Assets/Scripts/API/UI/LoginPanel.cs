@@ -57,4 +57,17 @@ public class LoginPanel : MonoBehaviour
             Debug.Log(log);
         });
     }
+
+    public void Logout()
+    {
+        APIConnector.instance.Post<Response<string>>(endPointSO.LogoutEndPoint, null, (data) =>
+        {
+            Debug.Log("로그아웃 되었습니다.");
+            PlayerPrefs.DeleteKey("sessionId");
+            PlayerPrefs.DeleteKey("Id");
+
+            //LogoutEvent?.Invoke();
+
+        }, null, true);
+    }
 }
