@@ -23,7 +23,7 @@ public class SignUpPanel : MonoBehaviour
     {
         if (!isNull())
         {
-            Account account = new Account
+            AccountRequest account = new AccountRequest
             {
                 email = EmailField.text,
                 playerId = IDField.text,

@@ -3050,7 +3050,7 @@ MonoBehaviour:
   NameSetEvent:
     m_PersistentCalls:
       m_Calls: []
-  endPointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
+  EndPoint: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &1317420887
 GameObject:
   m_ObjectHideFlags: 0

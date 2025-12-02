@@ -16,8 +16,8 @@ public class GameUIManager : MonoBehaviour
 
     void UpdateUI()
     {
-        playerName.text = PlayerDataManager.Instance._PlayerData.Name;
-        playerLevel.text = PlayerDataManager.Instance._PlayerData.Level.ToString();
-        playerExp.fillAmount = PlayerDataManager.Instance._PlayerData.Exp / PlayerDataManager.Instance._PlayerData.MaxExp;
+        playerName.text = PlayerDataManager.Instance.Data.Name;
+        playerLevel.text = PlayerDataManager.Instance.Data.Level.ToString();
+        playerExp.fillAmount = PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
     }
 }

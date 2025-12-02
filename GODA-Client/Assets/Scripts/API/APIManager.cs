@@ -5,7 +5,7 @@ public class APIManager : MonoBehaviour
 {
     public static APIManager instance;
 
-    public EndpointSO _EndPointSO;
+    public EndpointSO EndPoint;
 
     void Awake()
     {
@@ -22,8 +22,8 @@ public class APIManager : MonoBehaviour
 
     public IEnumerator RequesetPlayerName()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<Name>>(
-            endpoint: _EndPointSO.BaseUrl + _EndPointSO.PlayerNameEndPoint,
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(
+            endpoint: EndPoint.BaseUrl + EndPoint.PlayerNameEndPoint,
             onSuccess: (response) =>
             {
                 string name = response.Data.playerName;
@@ -37,8 +37,8 @@ public class APIManager : MonoBehaviour
 
     public IEnumerator RequestPlayerLevel()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
-            endpoint: _EndPointSO.BaseUrl + _EndPointSO.DataEndPoint + _EndPointSO.PlayerLevelEndPoint,
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
+            endpoint: EndPoint.BaseUrl + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int level = response.Data.level;
@@ -52,8 +52,8 @@ public class APIManager : MonoBehaviour
     
     public IEnumerator RequestPlayerExp()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
-            endpoint: _EndPointSO.BaseUrl + _EndPointSO.DataEndPoint + _EndPointSO.PlayerLevelEndPoint,
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
+            endpoint: EndPoint.BaseUrl + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int exp = response.Data.exp;
