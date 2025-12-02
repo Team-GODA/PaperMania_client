@@ -22,7 +22,7 @@ public class APIManager : MonoBehaviour
 
     public IEnumerator RequesetPlayerName()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<Name>>(
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(
             endpoint: EndPoint.BaseUrl + EndPoint.PlayerNameEndPoint,
             onSuccess: (response) =>
             {
@@ -37,7 +37,7 @@ public class APIManager : MonoBehaviour
 
     public IEnumerator RequestPlayerLevel()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
             endpoint: EndPoint.BaseUrl + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
@@ -52,7 +52,7 @@ public class APIManager : MonoBehaviour
     
     public IEnumerator RequestPlayerExp()
     {
-        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevel>>(
+        yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
             endpoint: EndPoint.BaseUrl + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {

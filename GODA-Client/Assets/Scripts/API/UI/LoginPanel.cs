@@ -36,7 +36,7 @@ public class LoginPanel : MonoBehaviour
         if (isNull())
             return;
 
-        LoginBody body = new LoginBody
+        LoginRequest body = new LoginRequest
         {
             playerId = IDField.text,
             password = PWField.text
