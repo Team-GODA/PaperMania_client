@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public float MaxHp;
     public float NowHp;
     public float Shield;
-    public float ToralHp => NowHp + Shield;
+    public float TotalHp => NowHp + Shield;
 
     [Header("Attack")]
     private float baseAttack;
