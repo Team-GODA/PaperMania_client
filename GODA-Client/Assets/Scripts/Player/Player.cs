@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor;
 
 public class Player : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
         if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
 
         Move();
+        Flip();
         Targeting();
     }
 
@@ -86,6 +88,22 @@ public class Player : MonoBehaviour
         }
 
         Target = nearest;
+    }
+
+    private void Flip()
+    {
+        float horiz = JoyStick.Horizontal;
+        if (Mathf.Abs(horiz) > 0.0001f)
+        {
+            transform.localScale = new Vector3(horiz < 0f ? -1f : 1f, 1f, 1f);
+        }
+        else
+        {
+            if (Mathf.Abs(lastMoveDirection.x) > 0.0001f)
+            {
+                transform.localScale = new Vector3(lastMoveDirection.x < 0f ? -1f : 1f, 1f, 1f);
+            }
+        }
     }
 
     public void Dash()
