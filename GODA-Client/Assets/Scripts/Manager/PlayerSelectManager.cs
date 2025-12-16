@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerSelectManager : MonoBehaviour
 {
     public CharactorData SelectCharactorSO;
     [SerializeField] private Player player;
+    [SerializeField] private Button SkillButton;
 
     private void Start()
     {
@@ -20,5 +22,14 @@ public class PlayerSelectManager : MonoBehaviour
         player.AttackRange = SelectCharactorSO.AttackRange;
         player.AttackCool = SelectCharactorSO.AttackCool;
         player.Speed = SelectCharactorSO.Speed;
+
+
+        SkillButton.onClick.RemoveAllListeners();
+
+        var skill = SelectCharactorSO.Skill;
+        if(skill != null )
+        {
+            SkillButton.onClick.AddListener(()=>StartCoroutine(skill.OnClickSkill()));
+        }
     }
 }

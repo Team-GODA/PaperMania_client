@@ -13,4 +13,5 @@ public class CharactorData : ScriptableObject
     public float AttackCool;
     public float Speed;
 
+    public CharactorSkill Skill;
 }
