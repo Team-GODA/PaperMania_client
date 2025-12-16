@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
+using UnityEditor.Animations;
 
 public class Player : MonoBehaviour
 {
@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
     public float TotalHp => NowHp + Shield;
 
     [Header("Attack")]
-    private float baseAttack;
-    public float AttackMultiplier;
-    public float AttackDmg => baseAttack * AttackMultiplier;
+    public float BaseAttack;
+    public float AttackMultiplier = 1;
+    public float AttackDmg => BaseAttack * AttackMultiplier;
     public float AttackRange;
     public float AttackCool;
     public GameObject Target;
@@ -37,9 +37,11 @@ public class Player : MonoBehaviour
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
-    protected virtual void Start()
+    public Animator CharactorAnimator;
+
+    private void Awake()
     {
-        NowHp = MaxHp;
+        CharactorAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()
