@@ -240,7 +240,7 @@ MonoBehaviour:
   DashDuration: 0.2
   DashCooldown: 1
   IsDashing: 0
-  CharactorAnimator: {fileID: 85566645}
+  CharacterAnimator: {fileID: 0}
 --- !u!61 &85566644
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -868,7 +868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8213153ad43c67f49bb1450e734b30fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectCharactorSO: {fileID: 11400000, guid: 4b84eda92c9e1054887f0569a51e6e55, type: 2}
+  SelectCharacterSO: {fileID: 11400000, guid: 4b84eda92c9e1054887f0569a51e6e55, type: 2}
   player: {fileID: 85566643}
   SkillButton: {fileID: 1364827966}
 --- !u!4 &992214151

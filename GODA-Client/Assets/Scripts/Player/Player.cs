@@ -37,11 +37,11 @@ public class Player : MonoBehaviour
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
-    public Animator CharactorAnimator;
+    public Animator CharacterAnimator;
 
     private void Awake()
     {
-        CharactorAnimator = gameObject.GetComponent<Animator>();
+        CharacterAnimator = gameObject.GetComponent<Animator>();
     }
 
     private void Update()

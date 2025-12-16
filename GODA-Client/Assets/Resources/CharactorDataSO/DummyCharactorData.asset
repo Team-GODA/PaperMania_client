@@ -18,3 +18,4 @@ MonoBehaviour:
   AttackRange: 10
   AttackCool: 1
   Speed: 5
+  Skill: {fileID: 11400000, guid: b3bed662e67b4ad4c8818fba6c7809bf, type: 2}

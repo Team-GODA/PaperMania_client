@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dummy2CharactorSkill", menuName = "Scriptable Objects/Dummy2CharactorSkill")]
-public class Dummy2CharactorSkill : CharactorSkill
+[CreateAssetMenu(fileName = "Dummy2CharacterSkill", menuName = "Scriptable Objects/Dummy2CharacterSkill")]
+public class Dummy2CharacterSkill : CharacterSkill
 {
     public override IEnumerator OnClickSkill()
     {

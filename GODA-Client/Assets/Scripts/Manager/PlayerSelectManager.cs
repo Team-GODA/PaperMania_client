@@ -1,9 +1,10 @@
+using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerSelectManager : MonoBehaviour
 {
-    public CharactorData SelectCharactorSO;
+    public CharacterData SelectCharacterSO;
     [SerializeField] private Player player;
     [SerializeField] private Button SkillButton;
 
@@ -14,19 +15,19 @@ public class PlayerSelectManager : MonoBehaviour
 
     public void PlayerSelected()
     {
-        player.CharactorAnimator.runtimeAnimatorController = SelectCharactorSO.DummyAnimator;
+        player.CharacterAnimator.runtimeAnimatorController = SelectCharacterSO.DummyAnimator;
 
-        player.MaxHp = SelectCharactorSO.MaxHp;
-        player.NowHp = SelectCharactorSO.MaxHp;
-        player.BaseAttack = SelectCharactorSO.baseAttack;
-        player.AttackRange = SelectCharactorSO.AttackRange;
-        player.AttackCool = SelectCharactorSO.AttackCool;
-        player.Speed = SelectCharactorSO.Speed;
+        player.MaxHp = SelectCharacterSO.MaxHp;
+        player.NowHp = SelectCharacterSO.MaxHp;
+        player.BaseAttack = SelectCharacterSO.baseAttack;
+        player.AttackRange = SelectCharacterSO.AttackRange;
+        player.AttackCool = SelectCharacterSO.AttackCool;
+        player.Speed = SelectCharacterSO.Speed;
 
 
         SkillButton.onClick.RemoveAllListeners();
 
-        var skill = SelectCharactorSO.Skill;
+        var skill = SelectCharacterSO.Skill;
         if(skill != null )
         {
             SkillButton.onClick.AddListener(()=>StartCoroutine(skill.OnClickSkill()));

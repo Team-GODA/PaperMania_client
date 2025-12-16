@@ -1,8 +1,8 @@
 using UnityEditor.Animations;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharactorData", menuName = "Scriptable Objects/CharactorData")]
-public class CharactorData : ScriptableObject
+[CreateAssetMenu(fileName = "CharacterData", menuName = "Scriptable Objects/CharacterData")]
+public class CharacterData : ScriptableObject
 {
     public RuntimeAnimatorController DummyAnimator;
 
@@ -13,5 +13,5 @@ public class CharactorData : ScriptableObject
     public float AttackCool;
     public float Speed;
 
-    public CharactorSkill Skill;
+    public CharacterSkill Skill;
 }
