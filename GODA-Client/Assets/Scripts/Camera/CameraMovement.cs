@@ -9,6 +9,9 @@ public class CameraMovement : MonoBehaviour
 	[Tooltip("시네머신 가상 카메라")]
 	[SerializeField] private CinemachineCamera virtualCamera;
 
+	[SerializeField] private float maxPosX;
+	[SerializeField] private float minPosX;
+
 	private Vector2 clickPos;
 	private Vector3 targetStartPos;
 
@@ -42,9 +45,15 @@ public class CameraMovement : MonoBehaviour
 		{
 			Vector2 delta = clickPos - touch.position;
 
+
 			Vector3 move = new Vector3(delta.x, 0f, 0f) * moveRate * Time.deltaTime;
 
-			followTarget.position = targetStartPos + move;
+			float posX = Mathf.Clamp(delta.x, minPosX, maxPosX);
+
+			Vector3 pos = targetStartPos + move;
+			pos.x = Mathf.Clamp(pos.x, minPosX, maxPosX);
+
+			followTarget.position = pos;
 		}
 	}
 }

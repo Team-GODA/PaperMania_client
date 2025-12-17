@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 331094286}
   - component: {fileID: 331094285}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: StageCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1175,6 +1175,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveRate: 25
   virtualCamera: {fileID: 1663043895}
+  maxPosX: 150
+  minPosX: -150
 --- !u!1 &1185650831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,7 +1957,7 @@ SceneRoots:
   - {fileID: 996114572}
   - {fileID: 63801367}
   - {fileID: 331094288}
+  - {fileID: 1185650835}
   - {fileID: 1374787849}
   - {fileID: 1663043896}
   - {fileID: 1831464920}
-  - {fileID: 1185650835}
