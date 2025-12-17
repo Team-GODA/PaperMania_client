@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
+    public int MonsterCount;
     [SerializeField] private GameObject enemyPrefeb;
     [SerializeField] private int initialSize = 20;
 
@@ -24,7 +25,17 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Update()
     {
+
+
         if (Input.GetMouseButtonDown(0))
+        {
+            SpawnMonster(MonsterCount);
+        }
+    }
+
+    private void SpawnMonster(int enemyCount)
+    {
+        for (int i = 0; i < enemyCount; i++)
         {
             GetEnemy(RandomSpawnPoint(), gameObject.transform.rotation);
         }
