@@ -4,9 +4,10 @@ using UnityEngine.UI;
 
 public class PlayerSelectManager : MonoBehaviour
 {
-    public CharacterData SelectCharacterSO;
+    public SelectData SelectCharacterSO;
     [SerializeField] private Player player;
-    [SerializeField] private Button SkillButton;
+    [SerializeField] private Button playerSkillButton;
+    [SerializeField] private Button supporterSkillButton;
 
     private void Start()
     {
@@ -15,22 +16,29 @@ public class PlayerSelectManager : MonoBehaviour
 
     public void PlayerSelected()
     {
-        player.CharacterAnimator.runtimeAnimatorController = SelectCharacterSO.DummyAnimator;
+        player.CharacterAnimator.runtimeAnimatorController = SelectCharacterSO.SelectCaracterData.DummyAnimator;
 
-        player.MaxHp = SelectCharacterSO.MaxHp;
-        player.NowHp = SelectCharacterSO.MaxHp;
-        player.BaseAttack = SelectCharacterSO.baseAttack;
-        player.AttackRange = SelectCharacterSO.AttackRange;
-        player.AttackCool = SelectCharacterSO.AttackCool;
-        player.Speed = SelectCharacterSO.Speed;
+        player.MaxHp = SelectCharacterSO.SelectCaracterData.MaxHp;
+        player.NowHp = SelectCharacterSO.SelectCaracterData.MaxHp;
+        player.BaseAttack = SelectCharacterSO.SelectCaracterData.baseAttack;
+        player.AttackRange = SelectCharacterSO.SelectCaracterData.AttackRange;
+        player.AttackCool = SelectCharacterSO.SelectCaracterData.AttackCool;
+        player.Speed = SelectCharacterSO.SelectCaracterData.Speed;
 
 
-        SkillButton.onClick.RemoveAllListeners();
+        playerSkillButton.onClick.RemoveAllListeners();
+        supporterSkillButton.onClick.RemoveAllListeners();
 
-        var skill = SelectCharacterSO.Skill;
+        var skill = SelectCharacterSO.SelectCaracterData.Skill;
         if(skill != null )
         {
-            SkillButton.onClick.AddListener(()=>StartCoroutine(skill.OnClickSkill()));
+            playerSkillButton.onClick.AddListener(()=>StartCoroutine(skill.OnClickSkill()));
+        }
+
+        var supSkill = SelectCharacterSO.SupporterSkill;
+        if (supSkill != null)
+        {
+            supporterSkillButton.onClick.AddListener(()=>StartCoroutine(supSkill.OnClickSkill()));
         }
     }
 }
