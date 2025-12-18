@@ -15,7 +15,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             if (instance == null)
             {
-                var obj = FindObjectOfType<LoadSceneManager>();
+                var obj = FindFirstObjectByType<LoadSceneManager>();
                 if (obj != null)
                 {
                     instance = obj;
