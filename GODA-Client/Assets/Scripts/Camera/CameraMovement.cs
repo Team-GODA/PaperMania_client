@@ -1,4 +1,5 @@
 using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -16,6 +17,7 @@ public class CameraMovement : MonoBehaviour
 	private Vector3 targetStartPos;
 
 	private Transform followTarget;
+	private bool isDragable = true;
 
 	private void Awake()
 	{
@@ -24,6 +26,8 @@ public class CameraMovement : MonoBehaviour
 
 	void Update()
 	{
+		if (!isDragable) return;
+
 		TouchMovement();
 	}
 
@@ -56,4 +60,7 @@ public class CameraMovement : MonoBehaviour
 			followTarget.position = pos;
 		}
 	}
+
+	public void EnableDrag() => isDragable = true;
+	public void DisableDrag() => isDragable = false;
 }
