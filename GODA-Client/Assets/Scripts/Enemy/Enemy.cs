@@ -20,12 +20,21 @@ public class Enemy : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
-    private bool isAlive = false;
+    [SerializeField] private bool isAlive = false;
 
     protected virtual void OnEnable()
     {
         isAlive = true;
         NowHP = MaxHP;
+    }
+
+    private void Update()
+    {
+        if (NowHP <= 0f)
+        {
+            Debug.Log("thisEnemy Die");
+            Die();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -41,11 +50,6 @@ public class Enemy : MonoBehaviour
             float leftDmg = damage - Shield;
             Shield = 0;
             NowHP -= leftDmg;
-        }
-
-        if (NowHP <= 0f)
-        {
-            Die();
         }
     }
 
