@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,11 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject xyMax;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
+
+    private int activeEnemies = 0;
+
+    public event Action OnAllEnemiesCleared;
+
     public void Enqueue(GameObject obj) => pool.Enqueue(obj);
 
     private void Awake()
@@ -25,19 +31,21 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void Update()
     {
-
-
         if (Input.GetMouseButtonDown(0))
         {
             SpawnMonster(MonsterCount);
         }
     }
 
-    private void SpawnMonster(int enemyCount)
+    public void SpawnMonster(int enemyCount)
     {
+        if (enemyCount <= 0) return;
+
+        activeEnemies += enemyCount;
+
         for (int i = 0; i < enemyCount; i++)
         {
-            GetEnemy(RandomSpawnPoint(), gameObject.transform.rotation);
+            GetEnemy(RandomSpawnPoint(), transform.rotation);
         }
     }
 
@@ -50,16 +58,39 @@ public class EnemySpawnManager : MonoBehaviour
             pool.Enqueue(extra);
         }
 
-        var enemy = pool.Dequeue();
-        enemy.transform.SetPositionAndRotation(position, rotation);
-        enemy.SetActive(true);
-        return enemy;
+        var enemyGo = pool.Dequeue();
+        enemyGo.transform.SetPositionAndRotation(position, rotation);
+
+        var enemyComp = enemyGo.GetComponent<Enemy>();
+        if (enemyComp != null)
+        {
+            enemyComp.OnDied -= HandleEnemyDeath;
+            enemyComp.OnDied += HandleEnemyDeath;
+        }
+
+        enemyGo.SetActive(true);
+        return enemyGo;
+    }
+
+    // 적이 죽었을 때 호출되는 핸들러
+    private void HandleEnemyDeath(Enemy e)
+    {
+        e.OnDied -= HandleEnemyDeath;
+
+        Enqueue(e.gameObject);
+
+        activeEnemies = Mathf.Max(0, activeEnemies - 1);
+
+        if (activeEnemies == 0)
+        {
+            OnAllEnemiesCleared?.Invoke();
+        }
     }
 
     Vector2 RandomSpawnPoint()
     {
-        float x = Random.Range(xyMin.transform.position.x, xyMax.transform.position.x);
-        float y = Random.Range(xyMin.transform.position.y, xyMax.transform.position.y);
+        float x = UnityEngine.Random.Range(xyMin.transform.position.x, xyMax.transform.position.x);
+        float y = UnityEngine.Random.Range(xyMin.transform.position.y, xyMax.transform.position.y);
         return new Vector2(x, y);
     }
 }
