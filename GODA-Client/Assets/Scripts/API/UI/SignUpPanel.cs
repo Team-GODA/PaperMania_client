@@ -1,12 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class SignUpPanel : MonoBehaviour
 {
-    public InputField EmailField;
-    public InputField IDField;
-    public InputField PWField;
+    public TMP_InputField EmailField;
+    public TMP_InputField IDField;
+    public TMP_InputField PWField;
 
     public UnityEvent OnSuccessEvent;
     public EndpointSO endPointSO;

@@ -1,11 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
-    public InputField IDField;
-    public InputField PWField;
+    public TMP_InputField IDField;
+    public TMP_InputField PWField;
     public UnityEvent LoginEvent;
     public UnityEvent NameSetEvent;
     public EndpointSO EndPoint;
