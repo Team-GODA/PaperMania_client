@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class FollowEnemy : Enemy
 {
-    public bool Die;
-
     public GameObject Player;
 
-    protected override void Start()
+    protected override void OnEnable()
     {
         MaxHP = 100;
-        base.Start();
+        base.OnEnable();
     }
 
     private void Awake()
@@ -20,15 +18,6 @@ public class FollowEnemy : Enemy
 
     private void Update()
     {
-        if (NowHP <= 0)
-        {
-            Die = true;
-        }
-        else
-        {
-            Die = false;
-        }
-
         Follow();
     }
 
