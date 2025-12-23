@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
-    //�뽬
+    //�뽬
     public float DashDistance = 3f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
