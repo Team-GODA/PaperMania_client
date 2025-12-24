@@ -19,7 +19,6 @@ public class SignUpPanel : MonoBehaviour
         PWField.text = "";
     }
 
-
     public void SignUp()
     {
         if (!isNull())

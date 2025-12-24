@@ -1,7 +1,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
@@ -11,6 +10,10 @@ public class LoginPanel : MonoBehaviour
     public UnityEvent NameSetEvent;
     public EndpointSO EndPoint;
 
+    [Header("오류 출력")]
+    [SerializeField] private WarningText idErrorText;
+    [SerializeField] private WarningText pwErrorText;
+
     void OnEnable()
     {
         IDField.text = "";
@@ -19,21 +22,25 @@ public class LoginPanel : MonoBehaviour
 
     private bool isNull()
     {
+        bool n = false;
         if (IDField.text == "")
         {
-            Debug.Log("아이디가 입력되지 않았습니다!");
-            return true;
+            idErrorText.ShowText("아이디가 입력되지 않았습니다!");
+            n = true;
         }
         if (PWField.text == "")
         {
-            Debug.Log("비밀번호가 입력되지 않았습니다!");
-            return true;
+            pwErrorText.ShowText("비밀번호가 입력되지 않았습니다!");
+            n = true;   
         }
-        return false;
+
+        return n;
     }
 
     public void Login()
     {
+        idErrorText.HideText();
+        pwErrorText.HideText();
         if (isNull())
             return;
 

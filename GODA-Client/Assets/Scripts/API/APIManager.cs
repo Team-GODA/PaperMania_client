@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// 플레이어 데이터를 불러오는 API를 모아 놓은 클래스입니다.
 public class APIManager : MonoBehaviour
 {
     public static APIManager instance;
