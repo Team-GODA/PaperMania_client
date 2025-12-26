@@ -1,19 +1,7 @@
 using UnityEngine;
 
-public class PlayerDataManager
+public class PlayerDataManager : SingleMono<PlayerDataManager>
 {
-    private static PlayerDataManager instance;
-    public static PlayerDataManager Instance
-    {
-        get
-        {
-            if(instance == null)
-            { 
-                instance = new PlayerDataManager();
-            }
-            return instance;
-        }
-    }
     public PlayerDataRequest Data = new PlayerDataRequest
     {
         Name = "",

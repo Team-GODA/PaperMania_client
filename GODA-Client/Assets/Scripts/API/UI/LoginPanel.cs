@@ -11,8 +11,7 @@ public class LoginPanel : MonoBehaviour
     public EndpointSO EndPoint;
 
     [Header("오류 출력")]
-    [SerializeField] private WarningText idErrorText;
-    [SerializeField] private WarningText pwErrorText;
+    [SerializeField] private WarningText errorText;
 
     void OnEnable()
     {
@@ -25,12 +24,12 @@ public class LoginPanel : MonoBehaviour
         bool n = false;
         if (IDField.text == "")
         {
-            idErrorText.ShowText("아이디가 입력되지 않았습니다!");
+            errorText.ShowText("아이디가 입력되지 않았습니다!");
             n = true;
         }
-        if (PWField.text == "")
+        else if (PWField.text == "")
         {
-            pwErrorText.ShowText("비밀번호가 입력되지 않았습니다!");
+            errorText.ShowText("비밀번호가 입력되지 않았습니다!");
             n = true;   
         }
 
@@ -39,8 +38,7 @@ public class LoginPanel : MonoBehaviour
 
     public void Login()
     {
-        idErrorText.HideText();
-        pwErrorText.HideText();
+        errorText.HideText();
         if (isNull())
             return;
 
@@ -63,6 +61,7 @@ public class LoginPanel : MonoBehaviour
         }, (log) =>
         {
             Debug.Log(log);
+            errorText.ShowText("오류 로그 출력 예정");
         });
     }
 

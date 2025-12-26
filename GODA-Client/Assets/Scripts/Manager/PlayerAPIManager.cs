@@ -2,25 +2,9 @@ using System.Collections;
 using UnityEngine;
 
 // 플레이어 데이터를 불러오는 API를 모아 놓은 클래스입니다.
-public class APIManager : MonoBehaviour
+public class PlayerAPIManager : SingleMono<PlayerAPIManager>
 {
-    public static APIManager instance;
-
     public EndpointSO EndPoint;
-
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public IEnumerator RequesetPlayerName()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(
