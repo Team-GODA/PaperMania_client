@@ -20,3 +20,4 @@ MonoBehaviour:
   <DataEndPoint>k__BackingField: data/
   <PlayerNameEndPoint>k__BackingField: name
   <PlayerDataEndPoint>k__BackingField: player
+  <PlayerLevelEndPoint>k__BackingField: level
