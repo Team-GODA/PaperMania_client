@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
     [SerializeField]
-    private Text playerName, playerLevel;
+    private TMP_Text playerName, playerLevel;
 
     [SerializeField]
     private Image playerExp;
@@ -17,7 +18,7 @@ public class GameUIManager : MonoBehaviour
     void UpdateUI()
     {
         playerName.text = PlayerDataManager.Instance.Data.Name;
-        playerLevel.text = PlayerDataManager.Instance.Data.Level.ToString();
+        playerLevel.text = "LV" + PlayerDataManager.Instance.Data.Level.ToString();
         playerExp.fillAmount = PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
     }
 }
