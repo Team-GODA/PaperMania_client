@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &85566641
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -566,10 +566,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 489973511}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ddec74ed6e93334cb955439bde4d81b, type: 3}
+  m_Script: {fileID: 11500000, guid: ac6eb8465bb44cf4bb6a9a23ee1d634b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slashParticle: {fileID: 0}
+  JoyStick: {fileID: 311516581}
+  MaxHp: 0
+  NowHp: 0
+  Shield: 0
+  BaseAttack: 0
+  AttackMultiplier: 1
+  AttackRange: 0
+  AttackCool: 0
+  Target: {fileID: 0}
+  TargetTag: Enemy
+  layer:
+    serializedVersion: 2
+    m_Bits: 8
+  Speed: 5
+  SlowDebuff: 1
+  Skill1Effect: {fileID: 1011930773}
+  Skill1Distance: 4
+  Skill1Duration: 0.2
+  DashDistance: 3
+  DashDuration: 0.2
+  DashCooldown: 1
+  IsDashing: 0
 --- !u!1 &577516781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1104,7 +1125,7 @@ Transform:
   m_LocalRotation: {x: 0.5377606, y: 0.14878507, z: 0.0943095, w: 0.82448906}
   m_LocalPosition: {x: 1.18, y: -0.52, z: -0.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 489973512}
   m_LocalEulerAnglesHint: {x: 120.83, y: 222.582, z: 218.002}
@@ -6054,8 +6075,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85566643}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+      - m_Target: {fileID: 489973514}
+        m_TargetAssemblyTypeName: PlayerAnimTest, Assembly-CSharp
         m_MethodName: Dash
         m_Mode: 1
         m_Arguments:
@@ -6186,7 +6207,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1364827967}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 489973514}
+        m_TargetAssemblyTypeName: PlayerAnimTest, Assembly-CSharp
+        m_MethodName: Skill1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1364827967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6714,7 +6747,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1997703726
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -16641,8 +16674,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 688675084}
   - {fileID: 1997703727}
-  - {fileID: 85566642}
   - {fileID: 1982890706}
   - {fileID: 671133195}
   - {fileID: 992214151}
+  - {fileID: 85566642}
   - {fileID: 489973512}
