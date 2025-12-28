@@ -8,7 +8,7 @@ public class GameUIManager : MonoBehaviour
 {
 	[SerializeField] private TMP_Text playerName, playerLevel;
 
-	[SerializeField] private Image playerExp;
+	[SerializeField] private Slider playerExp;
 
 	[SerializeField] private Action OnLogoutSuccess;
 
@@ -24,12 +24,18 @@ public class GameUIManager : MonoBehaviour
 	{
 		playerName.text = PlayerDataManager.Instance.Data.Name;
 		playerLevel.text = "LV" + PlayerDataManager.Instance.Data.Level.ToString();
-		playerExp.fillAmount = PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
+		playerExp.value = (float)PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
+	}
+
+	private void Awake()
+	{
+		OnLogoutSuccess += goMain;
+		OnLogoutSuccess += playerDataInit;
 	}
 
 	public void Logout()
 	{
-		APIConnector.instance.Post<Response<string>>(endPointSO.LogoutEndPoint, null, (data) =>
+		APIConnector.instance.Post<Response<string>>(endPointSO.AuthEndPoint + endPointSO.LogoutEndPoint, null, (data) =>
 		{
 			Debug.Log("로그아웃 되었습니다.");
 			PlayerPrefs.DeleteKey("sessionId");
@@ -43,5 +49,10 @@ public class GameUIManager : MonoBehaviour
 	private void goMain()
 	{
 		LoadSceneManager.Instance.GoMainScene();
+	}
+
+	private void playerDataInit()
+	{
+		PlayerDataManager.Instance.ResetPlayerData();
 	}
 }

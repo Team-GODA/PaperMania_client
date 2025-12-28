@@ -10,7 +10,7 @@ public class PlayerAPIManager : SingleMono<PlayerAPIManager>
     public IEnumerator RequesetPlayerName()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(
-            endpoint: EndPoint.BaseUrl + EndPoint.PlayerEndPoint + EndPoint.ProfileEndPoint + EndPoint.PlayerNameEndPoint,
+            endpoint: EndPoint.PlayerEndPoint + EndPoint.ProfileEndPoint + EndPoint.PlayerNameEndPoint,
             onSuccess: (response) =>
             {
                 string name = response.Data.playerName;
@@ -25,7 +25,7 @@ public class PlayerAPIManager : SingleMono<PlayerAPIManager>
     public IEnumerator RequestPlayerLevel()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
-            endpoint: EndPoint.BaseUrl + EndPoint.PlayerEndPoint + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
+            endpoint: EndPoint.PlayerEndPoint + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int level = response.Data.level;
@@ -40,15 +40,16 @@ public class PlayerAPIManager : SingleMono<PlayerAPIManager>
     public IEnumerator RequestPlayerExp()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerLevelResponse>>(
-            endpoint: EndPoint.BaseUrl + EndPoint.PlayerEndPoint + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
+            endpoint: EndPoint.PlayerEndPoint + EndPoint.DataEndPoint + EndPoint.PlayerLevelEndPoint,
             onSuccess: (response) =>
             {
                 int exp = response.Data.exp;
+                int maxExp = response.Data.maxExp;
                 Debug.Log(exp);
-                PlayerDataManager.Instance.SetPlayerLevel(exp);
+                PlayerDataManager.Instance.SetPlayerExp(exp, maxExp);
             }, onError: (log) =>
             {
                 Debug.Log(log);
-            });
+            }, true);
     }
 }

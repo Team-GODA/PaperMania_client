@@ -57,12 +57,6 @@ public class LoadSceneManager : MonoBehaviour
     private bool sceneLoaded = false;
     private bool apiLoaded = false;
 
-    private float logOutProgress;
-    private float dataInitalizedProgress;
-
-    private bool logOutLoaded = false;
-    private bool dataInitalized = false;
-
 
     public void MainLoadScene(string sceneName)
     {
@@ -86,10 +80,10 @@ public class LoadSceneManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
         loadSceneName = "StartScene";
 
-		logOutLoaded = false;
-		dataInitalized = false;
-		logOutProgress = 0f;
-		dataInitalizedProgress = 0f;
+        sceneLoaded = false;
+		sceneProgress = 0f;
+
+        StartCoroutine(logOutProcess());
 	}
 
     private IEnumerator loadSceneProcess()
@@ -111,13 +105,11 @@ public class LoadSceneManager : MonoBehaviour
     {
         loadingBar.value = 0f;
 
-        // 씬 불러오기
-        // 로그아웃 실행
-        // 클라이언트 데이터 초기화
+        StartCoroutine(sceneLoadCoroutine());
 
-        while(!logOutLoaded || !dataInitalized)
+        while(!sceneLoaded)
         {
-            loadingBar.value = (logOutProgress + dataInitalizedProgress) / 2f;
+            loadingBar.value = sceneProgress / 1f;
 
             yield return null;
         }
@@ -169,14 +161,14 @@ public class LoadSceneManager : MonoBehaviour
         yield break;
     }
 
+
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name == loadSceneName)
         {
             animator.SetTrigger("FadeOut");
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            Destroy(gameObject, 0.5f);
         }
     }
-
-
 }
