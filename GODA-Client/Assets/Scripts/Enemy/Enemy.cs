@@ -54,7 +54,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (!isAlive) return;
 
         if (Shield >= damage)
         {
