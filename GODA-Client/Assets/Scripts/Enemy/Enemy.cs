@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public GameObject Player;
+
     public event Action<Enemy> OnDied;
 
     [Header("Status")]
@@ -20,11 +22,23 @@ public class Enemy : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
+    public float FollowRange;
+    public float AttackRange;
+
     public bool isAttack = false;
-    [SerializeField] private bool isAlive = false;
+    [SerializeField] public bool isAlive = false;
+
+    private Vector3 dir;
+
+
+    private void Awake()
+    {
+        Player = GameObject.FindWithTag("Player");
+    }
 
     protected virtual void OnEnable()
     {
+        isAttack = false;
         isAlive = true;
         NowHP = MaxHP;
     }
@@ -70,6 +84,24 @@ public class Enemy : MonoBehaviour
         {
             isAlive = false;
             OnDied?.Invoke(this);
+        }
+    }
+
+    public void Follow()
+    {
+        dir = (Player.transform.position - transform.position).normalized;
+        transform.position += dir * MoveSpeed * Time.deltaTime;
+        FaceDirection();
+
+    }
+
+    private void FaceDirection()
+    {
+        if (Mathf.Abs(dir.x) > 0.0001f)
+        {
+            Vector3 ls = transform.localScale;
+            ls.x = dir.x < 0f ? -Mathf.Abs(ls.x) : Mathf.Abs(ls.x);
+            transform.localScale = ls;
         }
     }
 }
