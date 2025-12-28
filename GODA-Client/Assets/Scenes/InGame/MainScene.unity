@@ -8269,6 +8269,7 @@ GameObject:
   m_Component:
   - component: {fileID: 833712527}
   - component: {fileID: 833712528}
+  - component: {fileID: 833712529}
   m_Layer: 5
   m_Name: Toggle (2)
   m_TagString: Untagged
@@ -8343,8 +8344,34 @@ MonoBehaviour:
   m_Group: {fileID: 488914954}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 833712529}
+        m_TargetAssemblyTypeName: GraphicsToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &833712529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833712526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb979b13aa208149a03f418cb411630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GraphicsType: 2
+  toggle: {fileID: 833712528}
 --- !u!1 &838871305
 GameObject:
   m_ObjectHideFlags: 0
@@ -10492,6 +10519,7 @@ GameObject:
   m_Component:
   - component: {fileID: 993889048}
   - component: {fileID: 993889049}
+  - component: {fileID: 993889050}
   m_Layer: 5
   m_Name: Toggle (3)
   m_TagString: Untagged
@@ -10566,8 +10594,34 @@ MonoBehaviour:
   m_Group: {fileID: 488914954}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 993889050}
+        m_TargetAssemblyTypeName: GraphicsToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
+--- !u!114 &993889050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993889047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb979b13aa208149a03f418cb411630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GraphicsType: 3
+  toggle: {fileID: 993889049}
 --- !u!1 &1003140196
 GameObject:
   m_ObjectHideFlags: 0
@@ -13433,6 +13487,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1234482475}
   - component: {fileID: 1234482476}
+  - component: {fileID: 1234482477}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -13507,8 +13562,34 @@ MonoBehaviour:
   m_Group: {fileID: 1018731112}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234482477}
+        m_TargetAssemblyTypeName: HzToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1234482477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234482474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90a30c9beaf5bf4fa12ac20b3a993ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HzType: 1
+  toggle: {fileID: 1234482476}
 --- !u!1 &1245326669
 GameObject:
   m_ObjectHideFlags: 0
@@ -15264,6 +15345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398735840}
   - component: {fileID: 1398735841}
+  - component: {fileID: 1398735842}
   m_Layer: 5
   m_Name: Toggle (1)
   m_TagString: Untagged
@@ -15338,8 +15420,34 @@ MonoBehaviour:
   m_Group: {fileID: 1018731112}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1398735842}
+        m_TargetAssemblyTypeName: HzToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1398735842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398735839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90a30c9beaf5bf4fa12ac20b3a993ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HzType: 2
+  toggle: {fileID: 1398735841}
 --- !u!1 &1414872564
 GameObject:
   m_ObjectHideFlags: 0
@@ -15786,7 +15894,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 3782936.5}
+  m_AnchoredPosition: {x: 0, y: 3934278}
   m_SizeDelta: {x: 0.0002, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1442075403
@@ -15981,7 +16089,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -18457,6 +18565,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632408745}
   m_CullTransparentMesh: 1
+--- !u!1001 &1637038159
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442506305819684558, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7396939805341210308, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
+      propertyPath: m_Name
+      value: GraphicsManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b9c93ae5bb7caa241a0797f4d6f44e95, type: 3}
 --- !u!1 &1637288458
 GameObject:
   m_ObjectHideFlags: 0
@@ -19345,6 +19510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1789146309}
   - component: {fileID: 1789146310}
+  - component: {fileID: 1789146311}
   m_Layer: 5
   m_Name: Toggle (1)
   m_TagString: Untagged
@@ -19419,8 +19585,34 @@ MonoBehaviour:
   m_Group: {fileID: 488914954}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1789146311}
+        m_TargetAssemblyTypeName: GraphicsToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1789146311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1789146308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb979b13aa208149a03f418cb411630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GraphicsType: 1
+  toggle: {fileID: 1789146310}
 --- !u!1 &1801063226
 GameObject:
   m_ObjectHideFlags: 0
@@ -19569,6 +19761,7 @@ GameObject:
   - component: {fileID: 1841242403}
   - component: {fileID: 1841242402}
   - component: {fileID: 1841242401}
+  - component: {fileID: 1841242404}
   m_Layer: 5
   m_Name: GraphicsPage
   m_TagString: Untagged
@@ -19663,6 +19856,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1841242399}
   m_CullTransparentMesh: 1
+--- !u!114 &1841242404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841242399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1dc5bfa3e038294f86223dfaf8da1e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  graphicsToggles:
+  - {fileID: 2129132195}
+  - {fileID: 1789146311}
+  - {fileID: 833712529}
+  - {fileID: 993889050}
+  hzToggles:
+  - {fileID: 1234482477}
+  - {fileID: 1398735842}
 --- !u!1 &1841480127
 GameObject:
   m_ObjectHideFlags: 0
@@ -22658,6 +22871,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2129132193}
   - component: {fileID: 2129132194}
+  - component: {fileID: 2129132195}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -22732,8 +22946,34 @@ MonoBehaviour:
   m_Group: {fileID: 488914954}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2129132195}
+        m_TargetAssemblyTypeName: GraphicsToggle, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &2129132195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2129132192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb979b13aa208149a03f418cb411630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GraphicsType: 0
+  toggle: {fileID: 2129132194}
 --- !u!1 &2132068382
 GameObject:
   m_ObjectHideFlags: 0
@@ -23251,3 +23491,4 @@ SceneRoots:
   - {fileID: 64585640}
   - {fileID: 1118141578}
   - {fileID: 320266085}
+  - {fileID: 1637038159}
