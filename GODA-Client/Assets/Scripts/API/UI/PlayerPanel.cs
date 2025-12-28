@@ -24,7 +24,7 @@ public class PlayerPanel : MonoBehaviour
         string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerNameEndPoint;
         APIConnector.instance.Get<Response<PlayerNameResponse>>(endpoint, (body) =>
         {
-            Debug.Log($"{body.Data.playerName} : {body.Data.id}");
+            Debug.Log($"{body.Data.playerName}");
         }, (log) =>
         {
             Debug.Log(log);

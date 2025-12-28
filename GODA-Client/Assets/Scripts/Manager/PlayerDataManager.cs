@@ -1,24 +1,13 @@
 using UnityEngine;
 
-public class PlayerDataManager
+public class PlayerDataManager : SingleMono<PlayerDataManager>
 {
-    private static PlayerDataManager instance;
-    public static PlayerDataManager Instance
-    {
-        get
-        {
-            if(instance == null)
-            { 
-                instance = new PlayerDataManager();
-            }
-            return instance;
-        }
-    }
     public PlayerDataRequest Data = new PlayerDataRequest
     {
         Name = "",
         Level = 0,
-        Exp = 0
+        Exp = 0,
+        MaxExp = 0,
     };
 
     public void SetPlayerData(PlayerDataRequest playerData)
@@ -27,9 +16,18 @@ public class PlayerDataManager
         Debug.Log("조회 후 데이터 적용 성공!");
     }
 
+    public void ResetPlayerData()
+    {
+        Data = new PlayerDataRequest();
+    }
+
     public void SetPlayerName(string name) => Data.Name = name;
 
     public void SetPlayerLevel(int level) => Data.Level = level;
 
-    public void SetPlayerExp(int exp) => Data.Exp = exp;
+    public void SetPlayerExp(int exp, int maxExp)
+    {
+        Data.Exp = exp;
+        Data.MaxExp = maxExp;
+    }
 }
