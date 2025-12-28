@@ -8,8 +8,8 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject enemyPrefeb;
     [SerializeField] private int initialSize = 20;
 
-    [SerializeField] private GameObject xyMin;
-    [SerializeField] private GameObject xyMax;
+    [SerializeField] private GameObject minPos;
+    [SerializeField] private GameObject maxPos;
 
     private Queue<GameObject> pool = new Queue<GameObject>();
 
@@ -72,7 +72,6 @@ public class EnemySpawnManager : MonoBehaviour
         return enemyGo;
     }
 
-    // 적이 죽었을 때 호출되는 핸들러
     private void HandleEnemyDeath(Enemy e)
     {
         e.OnDied -= HandleEnemyDeath;
@@ -87,10 +86,11 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    Vector2 RandomSpawnPoint()
+    Vector3 RandomSpawnPoint()
     {
-        float x = UnityEngine.Random.Range(xyMin.transform.position.x, xyMax.transform.position.x);
-        float y = UnityEngine.Random.Range(xyMin.transform.position.y, xyMax.transform.position.y);
-        return new Vector2(x, y);
+        float x = UnityEngine.Random.Range(minPos.transform.position.x, maxPos.transform.position.x);
+        float z = UnityEngine.Random.Range(minPos.transform.position.z, maxPos.transform.position.z);
+        float y = minPos.transform.position.y;
+        return new Vector3(x, y, z);
     }
 }
