@@ -107,6 +107,7 @@ public class APIConnector : MonoBehaviour
     private IEnumerator postRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
         Debug.Log(endpoint);
+        Debug.Log(jsonData);
         using (UnityWebRequest request = new UnityWebRequest(endpointSO.BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;

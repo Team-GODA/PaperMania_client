@@ -7,20 +7,6 @@ public class PlayerAPIManager : SingleMono<PlayerAPIManager>
 {
     public EndpointSO EndPoint;
 
-    public IEnumerator RequestCreatePlayerData()
-    {
-        PlayerRequest body = new PlayerRequest();
-        string endP = EndPoint.BaseUrl + EndPoint.PlayerEndPoint;
-        endP = endP.Substring(0, endP.Length - 1);
-
-		yield return APIConnector.instance.PostCoroutine<Response<PlayerRequest>>( // <- 임시로 응답 클래스 대신 요청 클래스로 전환함. 추후 명세서에 따라 교체할 것.
-        endPoint: endP,
-        body: body,
-        onSuccess: (response) =>
-        {
-            Debug.Log(response.Data.playerName);
-        });
-	}
     public IEnumerator RequesetPlayerName()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(

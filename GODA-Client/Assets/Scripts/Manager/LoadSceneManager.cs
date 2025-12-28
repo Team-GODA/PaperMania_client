@@ -153,10 +153,6 @@ public class LoadSceneManager : MonoBehaviour
 
     IEnumerator apiLoadCoroutine()
     {
-        yield return PlayerAPIManager.Instance.RequestCreatePlayerData();
-
-        apiProgress = 0.2f;
-
         yield return PlayerAPIManager.Instance.RequestPlayerLevel();
 
         apiProgress = 0.5f;
