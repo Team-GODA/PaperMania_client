@@ -22,7 +22,7 @@ public class PlayerPanel : MonoBehaviour
     public void GetName()
     {
         string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerNameEndPoint;
-        APIConnector.instance.Get<Response<PlayerName>>(endpoint, (body) =>
+        APIConnector.instance.Get<Response<PlayerNameResponse>>(endpoint, (body) =>
         {
             Debug.Log($"{body.Data.playerName} : {body.Data.id}");
         }, (log) =>

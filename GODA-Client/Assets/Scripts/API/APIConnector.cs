@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 
+// API 메서드를 실행하고, 응답을 반환하는 클래스입니다.
 public class APIConnector : MonoBehaviour
 {
     public static APIConnector instance;

@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
+    public bool isAttack = false;
     [SerializeField] private bool isAlive = false;
 
     protected virtual void OnEnable()

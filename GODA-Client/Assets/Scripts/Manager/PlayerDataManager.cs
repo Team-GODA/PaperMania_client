@@ -14,22 +14,22 @@ public class PlayerDataManager
             return instance;
         }
     }
-    public PlayerData _PlayerData = new PlayerData
+    public PlayerDataRequest Data = new PlayerDataRequest
     {
         Name = "",
         Level = 0,
         Exp = 0
     };
 
-    public void SetPlayerData(PlayerData playerData)
+    public void SetPlayerData(PlayerDataRequest playerData)
     {
-        _PlayerData = playerData;
+        Data = playerData;
         Debug.Log("조회 후 데이터 적용 성공!");
     }
 
-    public void SetPlayerName(string name) => _PlayerData.Name = name;
+    public void SetPlayerName(string name) => Data.Name = name;
 
-    public void SetPlayerLevel(int level) => _PlayerData.Level = level;
+    public void SetPlayerLevel(int level) => Data.Level = level;
 
-    public void SetPlayerExp(int exp) => _PlayerData.Exp = exp;
+    public void SetPlayerExp(int exp) => Data.Exp = exp;
 }
