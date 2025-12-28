@@ -18,12 +18,29 @@ public class RoomManager : MonoBehaviour
     private bool isRunning = false;
     [SerializeField] private bool thisRoomClear = false;
 
+    public bool isOpenDoor = false;
+    [SerializeField] private GameObject[] closedDoor;
+    [SerializeField] private GameObject[] openDoor;
+
     private void Start()
     {
         thisRoomClear = false;
         if (spawnManager == null)
         {
             spawnManager = GetComponent<EnemySpawnManager>();
+        }
+    }
+
+    private void Update()
+    {
+        switch(isRunning)
+        {
+            case false:
+                if (isOpenDoor) break;
+                else OpenDoor(); break;
+            case true:
+                if(!isOpenDoor) break;
+                else CloseDoor(); break;
         }
     }
 
@@ -87,12 +104,40 @@ public class RoomManager : MonoBehaviour
 
     private void SetDoorsTrigger(bool isTrigger)
     {
-        if (doorColliders == null || doorColliders.Length == 0) return;
-
         foreach (var col in doorColliders)
         {
-            if (col == null) continue;
             col.isTrigger = isTrigger;
         }
+    }
+
+    private void OpenDoor()
+    {
+        foreach(var closeDoor in closedDoor)
+        {
+            closeDoor.gameObject.SetActive(false);
+        }
+
+        foreach (var openDoor in openDoor)
+        {
+            openDoor.gameObject.SetActive(true);
+        }
+        Debug.Log("중복확인");
+        isOpenDoor = true;
+    }
+
+    private void CloseDoor()
+    {
+        foreach (var closeDoor in closedDoor)
+        {
+            closeDoor.gameObject.SetActive(true);
+        }
+
+        foreach (var openDoor in openDoor)
+        {
+            openDoor.gameObject.SetActive(false);
+        }
+        Debug.Log("중복확인");
+
+        isOpenDoor = false;
     }
 }
