@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("Door colliders (set Collider2D of each door)")]
-    [SerializeField] private Collider2D[] doorColliders;
+    [Header("Door colliders")]
+    [SerializeField] private Collider[] doorColliders;
 
     [Header("Spawn")]
     [SerializeField] private EnemySpawnManager spawnManager;
@@ -27,9 +27,9 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Player")) return;
+        if (!other.gameObject.CompareTag("Player")) return;
         if (isRunning) return;
         if (thisRoomClear) return;
 
@@ -52,7 +52,7 @@ public class RoomManager : MonoBehaviour
     private IEnumerator CloseDoorsAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SetDoorsTrigger(false); 
+        SetDoorsTrigger(false);
         Debug.Log("RoomManager: Doors closed.");
     }
 
