@@ -4,14 +4,15 @@ public class EnemyAttack : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void Awake()
     {
-        if (enemy.isAttack)
-        {
-            if(collision.gameObject.TryGetComponent<Player>(out Player player))
+        enemy = gameObject.GetComponentInParent<Enemy>();
+    }
+    private void OnTriggerEnter(Collider collision)
+    {
+            if(collision.gameObject.TryGetComponent<PlayerAnimTest>(out PlayerAnimTest player))
             {
                 player.TakeDamage(enemy.AttackDmg);
             }
-        }
     }
 }
