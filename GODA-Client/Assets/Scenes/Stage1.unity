@@ -23983,6 +23983,10 @@ PrefabInstance:
       propertyPath: enemyPrefeb
       value: 
       objectReference: {fileID: 5204846507998284259, guid: 356762228bfc0654599d224e02cc2c8e, type: 3}
+    - target: {fileID: 1068970775944924996, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: MonsterCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091091061737873584, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -24171,6 +24175,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 97be5b0f8fd187e458e53c4288368fe1, type: 2}
+    - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: waveMonsterNum
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: openDoor.Array.size
       value: 1
@@ -41690,6 +41698,10 @@ PrefabInstance:
       propertyPath: enemyPrefeb
       value: 
       objectReference: {fileID: 5204846507998284259, guid: 356762228bfc0654599d224e02cc2c8e, type: 3}
+    - target: {fileID: 1068970775944924996, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: MonsterCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091091061737873584, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -41878,6 +41890,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 97be5b0f8fd187e458e53c4288368fe1, type: 2}
+    - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: waveMonsterNum
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: openDoor.Array.size
       value: 3
@@ -45077,6 +45093,10 @@ PrefabInstance:
       propertyPath: enemyPrefeb
       value: 
       objectReference: {fileID: 5204846507998284259, guid: 356762228bfc0654599d224e02cc2c8e, type: 3}
+    - target: {fileID: 1068970775944924996, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: MonsterCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091091061737873584, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -45265,6 +45285,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 97be5b0f8fd187e458e53c4288368fe1, type: 2}
+    - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: waveMonsterNum
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6007732482047536350, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -48385,6 +48409,10 @@ PrefabInstance:
       propertyPath: enemyPrefeb
       value: 
       objectReference: {fileID: 5204846507998284259, guid: 356762228bfc0654599d224e02cc2c8e, type: 3}
+    - target: {fileID: 1068970775944924996, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: MonsterCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1091091061737873584, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -48573,6 +48601,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 97be5b0f8fd187e458e53c4288368fe1, type: 2}
+    - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+      propertyPath: waveMonsterNum
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
       propertyPath: openDoor.Array.size
       value: 3
