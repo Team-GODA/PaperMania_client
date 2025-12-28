@@ -18,5 +18,7 @@ MonoBehaviour:
   <RegisterEndPoint>k__BackingField: register
   <LogoutEndPoint>k__BackingField: logout
   <DataEndPoint>k__BackingField: data/
+  <ProfileEndPoint>k__BackingField: profile/
   <PlayerNameEndPoint>k__BackingField: name
-  <PlayerDataEndPoint>k__BackingField: player
+  <PlayerEndPoint>k__BackingField: player/
+  <PlayerLevelEndPoint>k__BackingField: level

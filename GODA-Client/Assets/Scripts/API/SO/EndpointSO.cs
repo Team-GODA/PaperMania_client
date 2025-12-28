@@ -14,13 +14,15 @@ public class EndpointSO : ScriptableObject
     public string RegisterEndPoint { get; set; } = "register";
     [field: SerializeField]
     public string LogoutEndPoint { get; set; } = "logout";
-    [Header("Data")]
+    [Header("Player Profile")]
     [field: SerializeField]
     public string DataEndPoint { get; set; } = "data/";
     [field: SerializeField]
+    public string ProfileEndPoint { get; set; } = "profile/";
+    [field: SerializeField]
     public string PlayerNameEndPoint { get; set; } = "name";
     [field: SerializeField]
-    public string PlayerDataEndPoint { get; set; } = "player";
+    public string PlayerEndPoint { get; set; } = "player";
     [field: SerializeField]
     public string PlayerLevelEndPoint { get; set; } = "level";
 }

@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Data.Common;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -71,6 +71,21 @@ public class LoadSceneManager : MonoBehaviour
 
         StartCoroutine(loadSceneProcess());
     }
+
+    // 로그아웃 후 클라이언트 데이터 삭제한 다음 메인 화면으로 이동
+    //  logOutProgress, dataInitalizedProgress 코루틴 사용
+    public void GoMainScene()
+    {
+        gameObject.SetActive(true);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        loadSceneName = "StartScene";
+
+        sceneLoaded = false;
+		sceneProgress = 0f;
+
+        StartCoroutine(logOutProcess());
+	}
+
     private IEnumerator loadSceneProcess()
     {
         loadingBar.value = 0f;
@@ -81,6 +96,20 @@ public class LoadSceneManager : MonoBehaviour
         while(!apiLoaded || !sceneLoaded)
         {
             loadingBar.value = (sceneProgress + apiProgress) / 2f;
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator logOutProcess()
+    {
+        loadingBar.value = 0f;
+
+        StartCoroutine(sceneLoadCoroutine());
+
+        while(!sceneLoaded)
+        {
+            loadingBar.value = sceneProgress / 1f;
 
             yield return null;
         }
@@ -116,15 +145,15 @@ public class LoadSceneManager : MonoBehaviour
 
     IEnumerator apiLoadCoroutine()
     {
-        yield return APIManager.instance.RequestPlayerLevel();
+        yield return PlayerAPIManager.Instance.RequestPlayerLevel();
 
-        apiProgress = 0.3f;
+        apiProgress = 0.5f;
 
-        yield return APIManager.instance.RequesetPlayerName();
+        yield return PlayerAPIManager.Instance.RequesetPlayerName();
 
-        apiProgress = 0.6f;
+        apiProgress = 0.7f;
 
-        yield return APIManager.instance.RequestPlayerExp();
+        yield return PlayerAPIManager.Instance.RequestPlayerExp();
 
         apiProgress = 1f;
 
@@ -132,14 +161,14 @@ public class LoadSceneManager : MonoBehaviour
         yield break;
     }
 
+
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         if (arg0.name == loadSceneName)
         {
             animator.SetTrigger("FadeOut");
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            Destroy(gameObject, 0.5f);
         }
     }
-
-
 }

@@ -27,7 +27,7 @@ public class NameSet : MonoBehaviour
             playerName = text.text
         };
 
-        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerDataEndPoint;
+        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerEndPoint;
 
         APIConnector.instance.Post<Response<PlayerNameResponse>>(endpoint, newName, (user) =>
         {

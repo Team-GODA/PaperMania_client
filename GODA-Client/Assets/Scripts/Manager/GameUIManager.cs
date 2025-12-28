@@ -1,23 +1,58 @@
+using System;
+using System.Net;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    [SerializeField]
-    private Text playerName, playerLevel;
+	[SerializeField] private TMP_Text playerName, playerLevel;
 
-    [SerializeField]
-    private Image playerExp;
+	[SerializeField] private Slider playerExp;
+
+	[SerializeField] private Action OnLogoutSuccess;
+
+	[SerializeField] private EndpointSO endPointSO;
+
 
 	private void Start()
 	{
-        UpdateUI();
+		UpdateUI();
 	}
 
-    void UpdateUI()
-    {
-        playerName.text = PlayerDataManager.Instance.Data.Name;
-        playerLevel.text = PlayerDataManager.Instance.Data.Level.ToString();
-        playerExp.fillAmount = PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
-    }
+	void UpdateUI()
+	{
+		playerName.text = PlayerDataManager.Instance.Data.Name;
+		playerLevel.text = "LV" + PlayerDataManager.Instance.Data.Level.ToString();
+		playerExp.value = (float)PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
+	}
+
+	private void Awake()
+	{
+		OnLogoutSuccess += goMain;
+		OnLogoutSuccess += playerDataInit;
+	}
+
+	public void Logout()
+	{
+		APIConnector.instance.Post<Response<string>>(endPointSO.AuthEndPoint + endPointSO.LogoutEndPoint, null, (data) =>
+		{
+			Debug.Log("로그아웃 되었습니다.");
+			PlayerPrefs.DeleteKey("sessionId");
+			PlayerPrefs.DeleteKey("Id");
+
+			OnLogoutSuccess?.Invoke();
+
+		}, null, true);
+	}
+
+	private void goMain()
+	{
+		LoadSceneManager.Instance.GoMainScene();
+	}
+
+	private void playerDataInit()
+	{
+		PlayerDataManager.Instance.ResetPlayerData();
+	}
 }
