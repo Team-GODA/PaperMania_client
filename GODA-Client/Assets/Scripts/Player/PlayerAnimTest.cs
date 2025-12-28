@@ -35,6 +35,9 @@ public class PlayerAnimTest : MonoBehaviour
 	public float Skill1Duration = 0.2f;
 	private float skillDirX;
 
+	[Header("Skill 2")]
+	public GameObject SlashPrefab;
+
 	//�뽬
 	public float DashDistance = 3f;
 	public float DashDuration = 0.2f;
@@ -169,6 +172,16 @@ public class PlayerAnimTest : MonoBehaviour
 		StartCoroutine(Skill1Coroutine(skillDir));
 	}
 
+	public void Skill2()
+	{
+		CharacterAnimator.SetTrigger("Skill2");
+	}
+
+	public void StartSkill2()
+	{
+		StartCoroutine(Skill2Coroutine());
+	}
+
 	private IEnumerator DashCoroutine(Vector2 dir)
 	{
 		IsDashing = true;
@@ -212,6 +225,24 @@ public class PlayerAnimTest : MonoBehaviour
 			Skill1Effect.eulerAngles = rot;
 		}
 		IsDashing = false;
+	}
+	private IEnumerator Skill2Coroutine()
+	{
+		// 스킬 사용 관련 변수 초기화 및 움직이지 못하게 하기
+		//IsDashing = true;
+		//dashCooldownTimer = DashCooldown;
+		//float elapsed = 0f;
+		//float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
+
+		GameObject[] enemys = GameObject.FindGameObjectsWithTag(TargetTag);
+		foreach(GameObject enemy in enemys)
+		{
+			yield return new WaitForSeconds(0.5f / enemys.Length);
+			var effect = Instantiate(SlashPrefab, enemy.transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+			Destroy(effect, 0.5f);
+		}
+
+		yield break;
 	}
 
 	public void TakeDamage(float damage)
