@@ -10,15 +10,13 @@ public class SwordEnemy : Enemy
 
     protected override void OnEnable()
     {
-        MaxHP = 100;
+        MaxHP = 10;
         base.OnEnable();
         attackTimer = 0f;
     }
 
     private void Update()
     {
-        if (attackTimer > 0f) attackTimer -= Time.deltaTime;
-
         if (isAlive)
         {
             float dist = Vector3.Distance(Player.transform.position, transform.position);
@@ -50,5 +48,8 @@ public class SwordEnemy : Enemy
             isAttack = false;
             anim.SetBool("isMove", false);
         }
+        if (attackTimer > 0f) attackTimer -= Time.deltaTime;
+
+       
     }
 }
