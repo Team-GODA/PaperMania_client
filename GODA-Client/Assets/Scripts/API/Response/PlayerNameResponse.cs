@@ -3,6 +3,6 @@
 [Serializable]
 public class PlayerNameResponse
 {
-	public int id;
+	public int Id;
 	public string playerName;
 }

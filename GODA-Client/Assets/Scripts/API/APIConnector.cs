@@ -51,6 +51,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator getRequestGeneric<T>(string endpoint, Action<T> onSuccess, Action<string> onError, bool needSession = false)
     {
+        Debug.Log(endpoint);
         using (UnityWebRequest request = UnityWebRequest.Get(endpointSO.BaseUrl + endpoint))
         {
             request.timeout = 10;
@@ -81,16 +82,23 @@ public class APIConnector : MonoBehaviour
             }
         }
     }
-    /// <summary>
-    /// API 통신 중 POST를 수행하는 메서드입니다.
-    /// </summary>
-    /// <typeparam name="T">반환 클래스 타입</typeparam>
-    /// <param name="endPoint">엔드포인트</param>
-    /// <param name="body">보낼 데이터</param>
-    /// <param name="onSuccess">성공시 실행할 엑션</param>
-    /// <param name="onError">에러가 나타날 시 실행할 엑션</param>
-    /// <param name="needSession">세션 필요 여부(기본값 : false)</param>
-    public void Post<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
+
+	public IEnumerator PostCoroutine<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
+	{
+		string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
+		yield return postRequestGeneric<T>(endPoint, jsonData, onSuccess, onError, needSession);
+	}
+
+	/// <summary>
+	/// API 통신 중 POST를 수행하는 메서드입니다.
+	/// </summary>
+	/// <typeparam name="T">반환 클래스 타입</typeparam>
+	/// <param name="endPoint">엔드포인트</param>
+	/// <param name="body">보낼 데이터</param>
+	/// <param name="onSuccess">성공시 실행할 엑션</param>
+	/// <param name="onError">에러가 나타날 시 실행할 엑션</param>
+	/// <param name="needSession">세션 필요 여부(기본값 : false)</param>
+	public void Post<T>(string endPoint, object body, Action<T> onSuccess, Action<string> onError = null, bool needSession = false)
     {
         string jsonData = body != null ? JsonConvert.SerializeObject(body) : string.Empty;
         StartCoroutine(postRequestGeneric(endPoint, jsonData, onSuccess, onError, needSession));
@@ -98,6 +106,7 @@ public class APIConnector : MonoBehaviour
 
     private IEnumerator postRequestGeneric<T>(string endpoint, string jsonData, Action<T> onSuccess, Action<string> onError, bool needSession)
     {
+        Debug.Log(endpoint);
         using (UnityWebRequest request = new UnityWebRequest(endpointSO.BaseUrl + endpoint, "POST"))
         {
             request.timeout = 10;

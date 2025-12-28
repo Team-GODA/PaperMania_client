@@ -1,4 +1,6 @@
 using System.Collections;
+using System.Data.Common;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -55,6 +57,12 @@ public class LoadSceneManager : MonoBehaviour
     private bool sceneLoaded = false;
     private bool apiLoaded = false;
 
+    private float logOutProgress;
+    private float dataInitalizedProgress;
+
+    private bool logOutLoaded = false;
+    private bool dataInitalized = false;
+
 
     public void MainLoadScene(string sceneName)
     {
@@ -69,6 +77,21 @@ public class LoadSceneManager : MonoBehaviour
 
         StartCoroutine(loadSceneProcess());
     }
+
+    // 로그아웃 후 클라이언트 데이터 삭제한 다음 메인 화면으로 이동
+    //  logOutProgress, dataInitalizedProgress 코루틴 사용
+    public void GoMainScene()
+    {
+        gameObject.SetActive(true);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        loadSceneName = "StartScene";
+
+		logOutLoaded = false;
+		dataInitalized = false;
+		logOutProgress = 0f;
+		dataInitalizedProgress = 0f;
+	}
+
     private IEnumerator loadSceneProcess()
     {
         loadingBar.value = 0f;
@@ -79,6 +102,22 @@ public class LoadSceneManager : MonoBehaviour
         while(!apiLoaded || !sceneLoaded)
         {
             loadingBar.value = (sceneProgress + apiProgress) / 2f;
+
+            yield return null;
+        }
+    }
+
+    private IEnumerator logOutProcess()
+    {
+        loadingBar.value = 0f;
+
+        // 씬 불러오기
+        // 로그아웃 실행
+        // 클라이언트 데이터 초기화
+
+        while(!logOutLoaded || !dataInitalized)
+        {
+            loadingBar.value = (logOutProgress + dataInitalizedProgress) / 2f;
 
             yield return null;
         }
@@ -114,13 +153,17 @@ public class LoadSceneManager : MonoBehaviour
 
     IEnumerator apiLoadCoroutine()
     {
+        yield return PlayerAPIManager.Instance.RequestCreatePlayerData();
+
+        apiProgress = 0.2f;
+
         yield return PlayerAPIManager.Instance.RequestPlayerLevel();
 
-        apiProgress = 0.3f;
+        apiProgress = 0.5f;
 
         yield return PlayerAPIManager.Instance.RequesetPlayerName();
 
-        apiProgress = 0.6f;
+        apiProgress = 0.7f;
 
         yield return PlayerAPIManager.Instance.RequestPlayerExp();
 
