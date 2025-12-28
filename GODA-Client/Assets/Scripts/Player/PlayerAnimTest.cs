@@ -1,7 +1,9 @@
-using UnityEngine;
 using System.Collections;
+using UnityEditor.Animations;
+using UnityEngine;
+using UnityEngine.Windows;
 
-public class Player : MonoBehaviour
+public class PlayerAnimTest : MonoBehaviour
 {
     public bl_Joystick JoyStick;
 
@@ -27,6 +29,16 @@ public class Player : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
+    [Header("Skill 1")]
+    public Transform Skill1Effect;
+    public float Skill1Distance = 4f;
+    public float Skill1Duration = 0.2f;
+    private float skillDirX;
+
+    [Header("Skill 2")]
+    public GameObject SlashPrefab;
+
+    //�뽬
     public float DashDistance = 3f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
@@ -35,11 +47,12 @@ public class Player : MonoBehaviour
     private float dashCooldownTimer = 0f;
     private Vector2 lastMoveDirection = Vector2.right;
 
-    public Animator CharacterAnimator;
+    private Animator CharacterAnimator;
 
     private void Awake()
     {
-        CharacterAnimator = gameObject.GetComponent<Animator>();
+        CharacterAnimator = GetComponent<Animator>();
+        skillDirX = Skill1Effect.eulerAngles.x;
     }
 
     private void Update()
@@ -54,12 +67,16 @@ public class Player : MonoBehaviour
     private void Move()
     {
         if (IsDashing) return;
-
         Vector3 dir3 = new Vector3(JoyStick.Horizontal, 0f, JoyStick.Vertical);
         Vector3 dir = dir3.normalized;
         if (dir.sqrMagnitude > 0.0001f)
         {
+            CharacterAnimator.SetBool("isMove", true);
             lastMoveDirection = new Vector2(dir.x, dir.z).normalized;
+        }
+        else
+        {
+            CharacterAnimator.SetBool("isMove", false);
         }
         transform.position += dir * MoveSpeed * Time.deltaTime;
     }
@@ -113,6 +130,7 @@ public class Player : MonoBehaviour
 
         Vector2 input = new Vector2(JoyStick.Horizontal, JoyStick.Vertical);
         Vector2 dashDir;
+        CharacterAnimator.SetTrigger("Dash");
         if (input.sqrMagnitude > 0.0001f)
         {
             dashDir = input.normalized;
@@ -129,6 +147,40 @@ public class Player : MonoBehaviour
         StartCoroutine(DashCoroutine(dashDir));
     }
 
+    public void Skill1()
+    {
+        // 스킬 조건 추가
+        // if(nnn) return;
+
+        Vector2 input = new Vector2(JoyStick.Horizontal, JoyStick.Vertical);
+        Vector2 skillDir;
+
+        if (input.sqrMagnitude > 0.0001f)
+        {
+            skillDir = input.normalized;
+        }
+        else if (lastMoveDirection.sqrMagnitude > 0.0001f)
+        {
+            skillDir = lastMoveDirection;
+        }
+        else
+        {
+            skillDir = Vector2.up;
+        }
+
+        StartCoroutine(Skill1Coroutine(skillDir));
+    }
+
+    public void Skill2()
+    {
+        CharacterAnimator.SetTrigger("Skill2");
+    }
+
+    public void StartSkill2()
+    {
+        StartCoroutine(Skill2Coroutine());
+    }
+
     private IEnumerator DashCoroutine(Vector2 dir)
     {
         IsDashing = true;
@@ -137,11 +189,61 @@ public class Player : MonoBehaviour
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
         while (elapsed < DashDuration)
         {
+            // 변경: Vector2(dir.x, dir.y)을 X,Z로 변환하여 이동
             transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
         }
         IsDashing = false;
+    }
+
+    private IEnumerator Skill1Coroutine(Vector2 dir)
+    {
+        IsDashing = true;
+        dashCooldownTimer = DashCooldown;
+        float elapsed = 0f;
+        float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
+        CharacterAnimator.SetTrigger("Skill1");
+        while (elapsed < Skill1Duration)
+        {
+            // 변경: Vector2(dir.x, dir.y)을 X,Z로 변환하여 이동
+            transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        if (dir.x < 0)
+        {
+            Skill1Effect.localScale = new Vector3(-1, 1, 1);
+            Vector3 rot = Skill1Effect.localEulerAngles;
+            rot.x = -skillDirX;
+            Skill1Effect.eulerAngles = rot;
+        }
+        else
+        {
+            Skill1Effect.localScale = new Vector3(1, 1, 1);
+            Vector3 rot = Skill1Effect.localEulerAngles;
+            rot.x = skillDirX;
+            Skill1Effect.eulerAngles = rot;
+        }
+        IsDashing = false;
+    }
+    private IEnumerator Skill2Coroutine()
+    {
+        // 스킬 사용 관련 변수 초기화 및 움직이지 못하게 하기
+        //IsDashing = true;
+        //dashCooldownTimer = DashCooldown;
+        //float elapsed = 0f;
+        //float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
+
+        GameObject[] enemys = GameObject.FindGameObjectsWithTag(TargetTag);
+        foreach (GameObject enemy in enemys)
+        {
+            yield return new WaitForSeconds(0.5f / enemys.Length);
+            var effect = Instantiate(SlashPrefab, enemy.transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+            Destroy(effect, 0.5f);
+        }
+
+        yield break;
     }
 
     public void TakeDamage(float damage)

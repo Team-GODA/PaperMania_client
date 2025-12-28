@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 6458293460918085850}
   - component: {fileID: 740013581750962232}
   - component: {fileID: 6303925946828386290}
+  - component: {fileID: -2738238680362653883}
   m_Layer: 0
   m_Name: Character1
   m_TagString: Untagged
@@ -199,6 +200,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2738238680362653883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686614683192852192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c93b52f46cb1c74f99635bd08ab3689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHP: 100
+  NowHP: 0
+  Shield: 0
+  BaseAttack: 0
+  AttackMultiplier: 0
+  Speed: 0
+  SlowDebuff: 1
 --- !u!1 &6817610801082119565
 GameObject:
   m_ObjectHideFlags: 0
