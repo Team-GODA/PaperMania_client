@@ -39073,12 +39073,12 @@ MonoBehaviour:
   Speed: 5
   SlowDebuff: 1
   Skill1Effect: {fileID: 1980843537}
-  Skill1Distance: 4
-  Skill1Duration: 0.2
+  Skill1Distance: 3
+  Skill1Duration: 0.3
   SlashPrefab: {fileID: 5665003535027263182, guid: adf5384c5929e9344ba821bc392792b2, type: 3}
   DashDistance: 3
-  DashDuration: 0.2
-  DashCooldown: 1
+  DashDuration: 0.3
+  DashCooldown: 0.2
   IsDashing: 0
   Skill1Cooldown: 0.5
   Skill2Cooldown: 6

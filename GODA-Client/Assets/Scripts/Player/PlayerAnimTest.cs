@@ -210,19 +210,18 @@ public class PlayerAnimTest : MonoBehaviour
     private IEnumerator DashCoroutine(Vector2 dir)
     {
         IsDashing = true;
-        isInvulnerable = true; // <-- 대쉬 시작 시 무적
+        isInvulnerable = true;
         dashCooldownTimer = DashCooldown;
         float elapsed = 0f;
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
         while (elapsed < DashDuration)
         {
-            // X,Z 이동
             transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
         }
         IsDashing = false;
-        isInvulnerable = false; // <-- 대쉬 끝나면 무적 해제
+        isInvulnerable = false;
     }
 
     private IEnumerator Skill1Coroutine(Vector2 dir)
@@ -230,7 +229,6 @@ public class PlayerAnimTest : MonoBehaviour
         IsDashing = true;
         dashCooldownTimer = DashCooldown;
         float elapsed = 0f;
-        // corrected: use Skill1Duration to make total movement = Skill1Distance
         float skillSpeed = Skill1Distance / Mathf.Max(0.0001f, Skill1Duration);
         CharacterAnimator.SetTrigger("Skill1");
         while (elapsed < Skill1Duration)
