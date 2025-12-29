@@ -52,10 +52,10 @@ public class LoadSceneManager : MonoBehaviour
     private string loadSceneName;
 
     private float sceneProgress;
-    private float apiProgress;
+    private float mainProgress;
 
     private bool sceneLoaded = false;
-    private bool apiLoaded = false;
+    private bool mainLoaded = false;
 
 
     public void MainLoadScene(string sceneName)
@@ -65,16 +65,28 @@ public class LoadSceneManager : MonoBehaviour
         loadSceneName = sceneName;
 
         sceneLoaded = false;
-        apiLoaded = false;
+        mainLoaded = false;
         sceneProgress = 0f;
-        apiProgress = 0f;
+        mainProgress = 0f;
 
         StartCoroutine(loadSceneProcess());
     }
 
-    // 로그아웃 후 클라이언트 데이터 삭제한 다음 메인 화면으로 이동
-    //  logOutProgress, dataInitalizedProgress 코루틴 사용
-    public void GoMainScene()
+	public void LoadScene(string sceneName)
+	{
+		gameObject.SetActive(true);
+		SceneManager.sceneLoaded += OnSceneLoaded;
+		loadSceneName = sceneName;
+
+		sceneLoaded = false;
+		sceneProgress = 0f;
+
+		StartCoroutine(SceneLoadProcess());
+	}
+
+	// 로그아웃 후 클라이언트 데이터 삭제한 다음 메인 화면으로 이동
+	//  logOutProgress, dataInitalizedProgress 코루틴 사용
+	public void GoMainScene()
     {
         gameObject.SetActive(true);
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -91,17 +103,31 @@ public class LoadSceneManager : MonoBehaviour
         loadingBar.value = 0f;
 
         StartCoroutine(sceneLoadCoroutine());
-        StartCoroutine(apiLoadCoroutine());
+        StartCoroutine(mainLoadCoroutine());
 
-        while(!apiLoaded || !sceneLoaded)
+        while(!mainLoaded || !sceneLoaded)
         {
-            loadingBar.value = (sceneProgress + apiProgress) / 2f;
+            loadingBar.value = (sceneProgress + mainProgress) / 2f;
 
             yield return null;
         }
     }
 
-    private IEnumerator logOutProcess()
+	private IEnumerator SceneLoadProcess()
+	{
+		loadingBar.value = 0f;
+
+		StartCoroutine(sceneLoadCoroutine());
+
+		while (!mainLoaded)
+		{
+			loadingBar.value = (sceneProgress) / 1f;
+
+			yield return null;
+		}
+	}
+
+	private IEnumerator logOutProcess()
     {
         loadingBar.value = 0f;
 
@@ -143,21 +169,29 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
-    IEnumerator apiLoadCoroutine()
+    IEnumerator mainLoadCoroutine()
     {
         yield return PlayerAPIManager.Instance.RequestPlayerLevel();
 
-        apiProgress = 0.5f;
+        mainProgress = 0.2f;
 
         yield return PlayerAPIManager.Instance.RequesetPlayerName();
 
-        apiProgress = 0.7f;
+        mainProgress = 0.5f;
 
         yield return PlayerAPIManager.Instance.RequestPlayerExp();
 
-        apiProgress = 1f;
+        mainProgress = 0.7f;
 
-        apiLoaded = true;
+        yield return CharacterManager.Instance.GetCharacterAll();
+
+        mainProgress = 0.8f;
+
+        yield return PlayerAPIManager.Instance.RequestCashData();
+
+        mainProgress = 1f;
+
+        mainLoaded = true;
         yield break;
     }
 

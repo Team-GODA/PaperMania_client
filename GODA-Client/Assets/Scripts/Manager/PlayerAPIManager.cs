@@ -7,6 +7,19 @@ public class PlayerAPIManager : SingleMono<PlayerAPIManager>
 {
     public EndpointSO EndPoint;
 
+    public IEnumerator RequestCashData()
+    {
+		yield return APIConnector.instance.GetCoroutine<Response<CashResponse>>(
+	        endpoint: EndPoint.PlayerEndPoint + EndPoint.Currency,
+	        onSuccess: (response) =>
+	        {
+		        PlayerDataManager.Instance.SetCashData(response.Data);
+	        }, onError: (log) =>
+	        {
+		        Debug.Log(log);
+	        }, true);
+	}
+
     public IEnumerator RequesetPlayerName()
     {
         yield return APIConnector.instance.GetCoroutine<Response<PlayerNameResponse>>(
