@@ -49,18 +49,22 @@ public class PlayerAnimTest : MonoBehaviour
 
     private Animator CharacterAnimator;
 
-    // --- 추가된 스킬 쿨다운 관련 변수 ---
     [Header("Skill Cooldowns")]
     public float Skill1Cooldown = 0.5f;
     public float Skill2Cooldown = 6f;
     private float skill1Timer = 0f;
     private float skill2Timer = 0f;
-    private bool isUsingSkill = false; // 스킬 실행 중 다른 스킬 사용 차단
+    private bool isUsingSkill = false;
+
+    // invulnerable during dash only
+    private bool isInvulnerable = false;
+    public bool IsInvulnerable => isInvulnerable;
 
     private void Awake()
     {
         CharacterAnimator = GetComponent<Animator>();
-        skillDirX = Skill1Effect.eulerAngles.x;
+        if (Skill1Effect != null)
+            skillDirX = Skill1Effect.eulerAngles.x;
     }
 
     private void Update()
@@ -180,7 +184,7 @@ public class PlayerAnimTest : MonoBehaviour
             skillDir = Vector2.up;
         }
 
-        isUsingSkill = true; // 다른 스킬 차단
+        isUsingSkill = true;
         StartCoroutine(Skill1Coroutine(skillDir));
     }
 
@@ -188,7 +192,7 @@ public class PlayerAnimTest : MonoBehaviour
     {
         if (skill2Timer > 0f || isUsingSkill) return;
 
-        isUsingSkill = true; 
+        isUsingSkill = true;
         CharacterAnimator.SetTrigger("Skill2");
     }
 
@@ -196,7 +200,7 @@ public class PlayerAnimTest : MonoBehaviour
     {
         if (skill2Timer > 0f)
         {
-            isUsingSkill = false; // 안전하게 리셋
+            isUsingSkill = false;
             return;
         }
 
@@ -206,6 +210,7 @@ public class PlayerAnimTest : MonoBehaviour
     private IEnumerator DashCoroutine(Vector2 dir)
     {
         IsDashing = true;
+        isInvulnerable = true; // <-- 대쉬 시작 시 무적
         dashCooldownTimer = DashCooldown;
         float elapsed = 0f;
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
@@ -217,6 +222,7 @@ public class PlayerAnimTest : MonoBehaviour
             yield return null;
         }
         IsDashing = false;
+        isInvulnerable = false; // <-- 대쉬 끝나면 무적 해제
     }
 
     private IEnumerator Skill1Coroutine(Vector2 dir)
@@ -224,12 +230,12 @@ public class PlayerAnimTest : MonoBehaviour
         IsDashing = true;
         dashCooldownTimer = DashCooldown;
         float elapsed = 0f;
-        float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
+        // corrected: use Skill1Duration to make total movement = Skill1Distance
+        float skillSpeed = Skill1Distance / Mathf.Max(0.0001f, Skill1Duration);
         CharacterAnimator.SetTrigger("Skill1");
         while (elapsed < Skill1Duration)
         {
-            // X,Z 이동
-            transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
+            transform.position += new Vector3(dir.x, 0f, dir.y) * skillSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
         }
@@ -249,7 +255,6 @@ public class PlayerAnimTest : MonoBehaviour
         }
         IsDashing = false;
 
-        // 스킬 종료 처리: 쿨다운 시작, 스킬 사용 가능 상태로 변경
         skill1Timer = Skill1Cooldown;
         isUsingSkill = false;
     }
@@ -264,7 +269,6 @@ public class PlayerAnimTest : MonoBehaviour
             Destroy(effect, 0.5f);
         }
 
-        // 스킬 종료 처리: 쿨다운 시작, 스킬 사용 가능 상태로 변경
         skill2Timer = Skill2Cooldown;
         isUsingSkill = false;
 
@@ -273,6 +277,8 @@ public class PlayerAnimTest : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (isInvulnerable) return;
+
         if (Shield >= damage)
         {
             Shield -= damage;
@@ -289,5 +295,10 @@ public class PlayerAnimTest : MonoBehaviour
     {
         Gizmos.color = Color.black;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
+    }
+
+    public bool GetIsInvulnerable()
+    {
+        return isInvulnerable;
     }
 }
