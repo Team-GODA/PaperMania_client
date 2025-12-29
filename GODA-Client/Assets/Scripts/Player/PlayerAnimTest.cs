@@ -38,7 +38,7 @@ public class PlayerAnimTest : MonoBehaviour
     [Header("Skill 2")]
     public GameObject SlashPrefab;
 
-    //�뽬
+    // Dash
     public float DashDistance = 3f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
@@ -49,6 +49,14 @@ public class PlayerAnimTest : MonoBehaviour
 
     private Animator CharacterAnimator;
 
+    // --- 추가된 스킬 쿨다운 관련 변수 ---
+    [Header("Skill Cooldowns")]
+    public float Skill1Cooldown = 0.5f;
+    public float Skill2Cooldown = 6f;
+    private float skill1Timer = 0f;
+    private float skill2Timer = 0f;
+    private bool isUsingSkill = false; // 스킬 실행 중 다른 스킬 사용 차단
+
     private void Awake()
     {
         CharacterAnimator = GetComponent<Animator>();
@@ -58,6 +66,10 @@ public class PlayerAnimTest : MonoBehaviour
     private void Update()
     {
         if (dashCooldownTimer > 0f) dashCooldownTimer -= Time.deltaTime;
+
+        // 쿨다운 타이머 감소
+        if (skill1Timer > 0f) skill1Timer -= Time.deltaTime;
+        if (skill2Timer > 0f) skill2Timer -= Time.deltaTime;
 
         Move();
         Flip();
@@ -149,8 +161,8 @@ public class PlayerAnimTest : MonoBehaviour
 
     public void Skill1()
     {
-        // 스킬 조건 추가
-        // if(nnn) return;
+        // 쿨다운 중이거나 이미 스킬 사용 중이면 무시
+        if (skill1Timer > 0f || isUsingSkill) return;
 
         Vector2 input = new Vector2(JoyStick.Horizontal, JoyStick.Vertical);
         Vector2 skillDir;
@@ -168,16 +180,26 @@ public class PlayerAnimTest : MonoBehaviour
             skillDir = Vector2.up;
         }
 
+        isUsingSkill = true; // 다른 스킬 차단
         StartCoroutine(Skill1Coroutine(skillDir));
     }
 
     public void Skill2()
     {
+        if (skill2Timer > 0f || isUsingSkill) return;
+
+        isUsingSkill = true; 
         CharacterAnimator.SetTrigger("Skill2");
     }
 
     public void StartSkill2()
     {
+        if (skill2Timer > 0f)
+        {
+            isUsingSkill = false; // 안전하게 리셋
+            return;
+        }
+
         StartCoroutine(Skill2Coroutine());
     }
 
@@ -189,7 +211,7 @@ public class PlayerAnimTest : MonoBehaviour
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
         while (elapsed < DashDuration)
         {
-            // 변경: Vector2(dir.x, dir.y)을 X,Z로 변환하여 이동
+            // X,Z 이동
             transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
@@ -206,7 +228,7 @@ public class PlayerAnimTest : MonoBehaviour
         CharacterAnimator.SetTrigger("Skill1");
         while (elapsed < Skill1Duration)
         {
-            // 변경: Vector2(dir.x, dir.y)을 X,Z로 변환하여 이동
+            // X,Z 이동
             transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
@@ -226,15 +248,14 @@ public class PlayerAnimTest : MonoBehaviour
             Skill1Effect.eulerAngles = rot;
         }
         IsDashing = false;
+
+        // 스킬 종료 처리: 쿨다운 시작, 스킬 사용 가능 상태로 변경
+        skill1Timer = Skill1Cooldown;
+        isUsingSkill = false;
     }
+
     private IEnumerator Skill2Coroutine()
     {
-        // 스킬 사용 관련 변수 초기화 및 움직이지 못하게 하기
-        //IsDashing = true;
-        //dashCooldownTimer = DashCooldown;
-        //float elapsed = 0f;
-        //float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
-
         GameObject[] enemys = GameObject.FindGameObjectsWithTag(TargetTag);
         foreach (GameObject enemy in enemys)
         {
@@ -242,6 +263,10 @@ public class PlayerAnimTest : MonoBehaviour
             var effect = Instantiate(SlashPrefab, enemy.transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
             Destroy(effect, 0.5f);
         }
+
+        // 스킬 종료 처리: 쿨다운 시작, 스킬 사용 가능 상태로 변경
+        skill2Timer = Skill2Cooldown;
+        isUsingSkill = false;
 
         yield break;
     }
