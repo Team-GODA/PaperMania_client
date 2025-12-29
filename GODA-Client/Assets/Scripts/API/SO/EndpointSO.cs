@@ -32,4 +32,6 @@ public class EndpointSO : ScriptableObject
 
     [field: SerializeField]
     public string Currency { get; set; } = "currency";
+    [field: SerializeField]
+    public string Reward { get; set; } = "reward/stage";
 }

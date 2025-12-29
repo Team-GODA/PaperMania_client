@@ -1404,26 +1404,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1663043898}
-        m_TargetAssemblyTypeName: StageTargetSelect, Assembly-CSharp
-        m_MethodName: ChangeTarget
+      - m_Target: {fileID: 772971956}
+        m_TargetAssemblyTypeName: StageInfo, Assembly-CSharp
+        m_MethodName: GetStageData
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1185650834}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
@@ -1590,6 +1578,7 @@ GameObject:
   - component: {fileID: 772971954}
   - component: {fileID: 772971953}
   - component: {fileID: 772971955}
+  - component: {fileID: 772971956}
   m_Layer: 5
   m_Name: InfoPanel
   m_TagString: Untagged
@@ -1686,6 +1675,51 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &772971956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772971950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb9bb6ba1d6ad34cbfe931c2ff1eaf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  First: 1
+  Title: {fileID: 357828186}
+  PaperPieceText: {fileID: 1179170329}
+  GoldText: {fileID: 305761503}
+  ExpText: {fileID: 306651308}
+  OnDataLoaded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1185650834}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1663043898}
+        m_TargetAssemblyTypeName: StageTargetSelect, Assembly-CSharp
+        m_MethodName: ChangeTarget
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  last: 0
 --- !u!1 &818876507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2738,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185650831}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 996114571}
@@ -3471,6 +3505,7 @@ MonoBehaviour:
   - {fileID: 1396897337}
   mainTarget: {fileID: 1831464920}
   targetOffset: {x: 20, y: 0, z: 0}
+  info: {fileID: 772971956}
 --- !u!1 &1705080412
 GameObject:
   m_ObjectHideFlags: 0
@@ -3515,6 +3550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c693391c2f51d4418ec517221a4b151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StageUI: {fileID: 772971956}
+  endPointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
 --- !u!1 &1755164458
 GameObject:
   m_ObjectHideFlags: 0
