@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
 
-public class StageManager : MonoBehaviour
+public class StageManager : SceneSingleMono<StageManager>
 {
     [SerializeField] private PlayerAnimTest player;
     [SerializeField] private RoomManager answerRoom;
@@ -8,16 +9,19 @@ public class StageManager : MonoBehaviour
     public bool StageClear = false;
     public bool lose = false;
 
+    public UnityEvent OnStageClear;
+    public UnityEvent OnStageFailed;
+
     private void Update()
     {
         if (player.NowHp <= 0)
         {
             lose = true;
-            StageClear = false;
+            OnStageFailed?.Invoke();
         }
         if (answerRoom.thisRoomClear)
         {
-            StageClear = true;
+            OnStageClear?.Invoke();
         }
     }
 }
