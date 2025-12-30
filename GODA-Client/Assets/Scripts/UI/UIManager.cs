@@ -16,8 +16,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        skill1Image.fillAmount = 1- player.skill1Timer / player.Skill1Cooldown;
-        skill2Image.fillAmount = 1 -player.skill2Timer / player.Skill2Cooldown;
+        skill1Image.fillAmount = player.skill1Timer / player.Skill1Cooldown;
+        skill2Image.fillAmount = player.skill2Timer / player.Skill2Cooldown;
 
         HPbar.fillAmount = player.NowHp / player.MaxHp;
     }
