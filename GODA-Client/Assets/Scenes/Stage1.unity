@@ -39208,7 +39208,7 @@ MonoBehaviour:
   DashDuration: 0.3
   DashCooldown: 0.2
   IsDashing: 0
-  Skill1Cooldown: 0.5
+  Skill1Cooldown: 0.4
   Skill2Cooldown: 6
 --- !u!95 &1248212296
 Animator:

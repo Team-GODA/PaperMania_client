@@ -52,8 +52,8 @@ public class PlayerAnimTest : MonoBehaviour
     [Header("Skill Cooldowns")]
     public float Skill1Cooldown = 0.5f;
     public float Skill2Cooldown = 6f;
-    private float skill1Timer = 0f;
-    private float skill2Timer = 0f;
+    public float skill1Timer = 0f;
+    public float skill2Timer = 0f;
     private bool isUsingSkill = false;
 
     // invulnerable during dash only
