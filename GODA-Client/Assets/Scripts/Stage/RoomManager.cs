@@ -16,7 +16,7 @@ public class RoomManager : MonoBehaviour
 
     private int currentWave = 0;
     private bool isRunning = false;
-    [SerializeField] private bool thisRoomClear = false;
+    [SerializeField] public bool thisRoomClear = false;
 
     public bool isOpenDoor = false;
     [SerializeField] private GameObject[] closedDoor;
