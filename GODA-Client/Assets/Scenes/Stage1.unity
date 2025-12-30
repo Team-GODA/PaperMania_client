@@ -18729,6 +18729,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &476402237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 476402238}
+  - component: {fileID: 476402239}
+  m_Layer: 0
+  m_Name: StageManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &476402238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476402237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 420.9162, y: 208.87473, z: -332.28275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &476402239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476402237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4719f2caa3b2ee54baf2cf29b87dbc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1248212295}
+  answerRoom: {fileID: 551750964}
+  StageClear: 0
+  lose: 0
 --- !u!1 &476543093
 GameObject:
   m_ObjectHideFlags: 0
@@ -19985,6 +20033,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &551750964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5870404737575852696, guid: a71e68ca347255a4c874870c319d2094, type: 3}
+  m_PrefabInstance: {fileID: 1567920845}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e757ff0d44312fa4d8fd84c57f876398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &559097567
 GameObject:
   m_ObjectHideFlags: 0
@@ -61345,6 +61404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skill1Image: {fileID: 276575110}
   skill2Image: {fileID: 955869051}
+  HPbar: {fileID: 1216977226}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -61361,3 +61421,4 @@ SceneRoots:
   - {fileID: 2141552459}
   - {fileID: 1248212297}
   - {fileID: 424334652}
+  - {fileID: 476402238}
