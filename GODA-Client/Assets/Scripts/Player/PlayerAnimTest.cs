@@ -192,6 +192,10 @@ public class PlayerAnimTest : MonoBehaviour
     {
         if (skill2Timer > 0f || isUsingSkill) return;
 
+        IsDashing = true;
+        dashCooldownTimer = DashCooldown;
+        float dashSpeed = Skill1Distance / Mathf.Max(0.0001f, DashDuration);
+
         isUsingSkill = true;
         CharacterAnimator.SetTrigger("Skill2");
     }
@@ -269,6 +273,9 @@ public class PlayerAnimTest : MonoBehaviour
 
         skill2Timer = Skill2Cooldown;
         isUsingSkill = false;
+
+        IsDashing = false;
+        dashCooldownTimer = DashCooldown;
 
         yield break;
     }
