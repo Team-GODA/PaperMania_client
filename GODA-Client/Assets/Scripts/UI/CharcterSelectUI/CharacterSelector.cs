@@ -20,4 +20,9 @@ public class CharacterSelector : MonoBehaviour
 		if (subCharacterList.Count >= 2) subCharacterList.RemoveAt(0);
 		subCharacterList.Add(character);
 	}
+
+	public void GameStart()
+	{
+		LoadSceneManager.Instance.LoadScene("Stage1");
+	}
 }

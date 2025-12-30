@@ -10,6 +10,13 @@ public class PlayerDataManager : SingleMono<PlayerDataManager>
         MaxExp = 0,
     };
 
+    public CashResponse cashData;
+
+    public void SetCashData(CashResponse response)
+    {
+        cashData = response;
+    }
+
     public void SetPlayerData(PlayerDataRequest playerData)
     {
         Data = playerData;

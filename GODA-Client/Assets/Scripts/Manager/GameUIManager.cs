@@ -1,12 +1,11 @@
 using System;
-using System.Net;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-	[SerializeField] private TMP_Text playerName, playerLevel;
+	[SerializeField] private TMP_Text playerName, playerLevel, CoinText, PaperPieceText;
 
 	[SerializeField] private Slider playerExp;
 
@@ -25,6 +24,8 @@ public class GameUIManager : MonoBehaviour
 		playerName.text = PlayerDataManager.Instance.Data.Name;
 		playerLevel.text = "LV" + PlayerDataManager.Instance.Data.Level.ToString();
 		playerExp.value = (float)PlayerDataManager.Instance.Data.Exp / PlayerDataManager.Instance.Data.MaxExp;
+		PaperPieceText.text = PlayerDataManager.Instance.cashData.paperPiece.ToString("N0");
+		CoinText.text = PlayerDataManager.Instance.cashData.gold.ToString("N0");
 	}
 
 	private void Awake()

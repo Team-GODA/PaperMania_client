@@ -6,6 +6,7 @@ public class StageTargetSelect : MonoBehaviour
 	[SerializeField] private Transform[] stageTargets;
 	[SerializeField] private Transform mainTarget;
 	[SerializeField] private Vector3 targetOffset;
+	[SerializeField] private StageInfo info;
 
 	private CinemachineCamera virtualCamera;
 
@@ -14,9 +15,9 @@ public class StageTargetSelect : MonoBehaviour
 		virtualCamera = GetComponent<CinemachineCamera>();
 	}
 
-	public void ChangeTarget(int idx)
+	public void ChangeTarget()
 	{
-		virtualCamera.Follow = stageTargets[idx];
+		virtualCamera.Follow = stageTargets[info.last-1];
 		GetComponent<CinemachinePositionComposer>().TargetOffset = targetOffset;
 	}
 	

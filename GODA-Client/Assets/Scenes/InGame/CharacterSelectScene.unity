@@ -1089,8 +1089,8 @@ Transform:
   m_GameObject: {fileID: 565582205}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001582645, y: -0.004386008, z: 0.0006201474}
-  m_LocalScale: {x: 0.0050244797, y: 0.0050244797, z: 0.0050244797}
+  m_LocalPosition: {x: 0.0015, y: -0.0036, z: 0}
+  m_LocalScale: {x: 0.0029519824, y: 0.0029519824, z: 0.0029519824}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1646685346}
@@ -1139,7 +1139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5465301123791868739, guid: 2ca4b14ae3f47ea4ba185bf0dee739b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 19fd7ddad675cc0469b32ed4b23308dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1232,7 +1232,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 612160707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1282783221}
+        m_TargetAssemblyTypeName: CharacterSelector, Assembly-CSharp
+        m_MethodName: GameStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &612160707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2347,7 +2359,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7404870509355504010, guid: 2ca4b14ae3f47ea4ba185bf0dee739b1, type: 3}
+  m_Sprite: {fileID: 1776754572, guid: 4077fafddff585f45bd6899dd92a38f3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2367,9 +2379,9 @@ Transform:
   m_GameObject: {fileID: 1511969304}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31, y: -0.26, z: 0}
-  m_LocalScale: {x: 1.5242, y: 1.5242, z: 1.5242}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0.31, y: 0.29, z: 0}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2392,7 +2404,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.18, y: 4.11, z: 0.2}
+  m_Size: {x: 1.94, y: 3.48, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1511969308
 Rigidbody:
@@ -3479,8 +3491,8 @@ Transform:
   m_GameObject: {fileID: 1985772038}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.001582645, y: -0.004386008, z: 0.0006201474}
-  m_LocalScale: {x: 0.0050244797, y: 0.0050244797, z: 0.0050244797}
+  m_LocalPosition: {x: -0.0027, y: -0.004386, z: 0.0006201474}
+  m_LocalScale: {x: 0.0026262957, y: 0.0026262957, z: 0.0026262957}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 493007059}
@@ -3529,7 +3541,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5465301123791868739, guid: 2ca4b14ae3f47ea4ba185bf0dee739b1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 028bcffd51b24b240bf0355733afa4e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4391,7 +4403,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE90\uB9AD\uD130\uBA85"
+  m_text: "\uCE58\uC720\uCE90"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -4482,7 +4494,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE90\uB9AD\uD130\uBA85"
+  m_text: "\uB51C\uC99D\uCE90"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -4573,7 +4585,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCE90\uB9AD\uD130\uBA85"
+  m_text: "\uCE90\uB9AD\uD1301"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -5210,7 +5222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lv 28
+  m_text: Lv 01
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -5301,7 +5313,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lv 28
+  m_text: Lv 01
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -5392,7 +5404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lv 28
+  m_text: Lv 01
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -6822,7 +6834,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 7480967685124953643}
   m_OnClick:
     m_PersistentCalls:
@@ -6896,7 +6908,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 7480967685754903627}
   m_OnClick:
     m_PersistentCalls:
@@ -6970,7 +6982,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 7480967685998327951}
   m_OnClick:
     m_PersistentCalls:
@@ -7019,7 +7031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uADFC\uAC70\uB9AC"
+  m_text: "\uCE58\uC720"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
@@ -7110,7 +7122,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uADFC\uAC70\uB9AC"
+  m_text: "\uAC15\uD654"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}
   m_sharedMaterial: {fileID: 1526771592173476536, guid: 61c66361ef1898141a8301f3d865ffde, type: 2}

@@ -25,4 +25,13 @@ public class EndpointSO : ScriptableObject
     public string PlayerEndPoint { get; set; } = "player";
     [field: SerializeField]
     public string PlayerLevelEndPoint { get; set; } = "level";
+    [field: SerializeField]
+    public string CharacterEndPoint { get; set; } = "character/";
+    [field: SerializeField]
+    public string CharacterAllEndPoint { get; set; } = "all";
+
+    [field: SerializeField]
+    public string Currency { get; set; } = "currency";
+    [field: SerializeField]
+    public string Reward { get; set; } = "reward/stage";
 }

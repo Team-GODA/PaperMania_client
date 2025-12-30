@@ -1,7 +1,5 @@
 using System.Collections;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class PlayerAnimTest : MonoBehaviour
 {
