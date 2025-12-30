@@ -15,7 +15,7 @@ public class StageManager : MonoBehaviour
             lose = true;
             StageClear = false;
         }
-        if (answerRoom.thisRoomClear)
+        else if (answerRoom.thisRoomClear)
         {
             StageClear = true;
         }
