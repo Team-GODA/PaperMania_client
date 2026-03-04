@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c07c82e85d7a344fbafe9b1fda9390b, type: 3}
+  m_Name: endPoint
+  m_EditorClassIdentifier: 
+  <BaseUrl>k__BackingField: http://gsmsv-1.yujun.kr:29489/api/v3/
+  <AuthEndPoint>k__BackingField: auth/
+  <LoginEndPoint>k__BackingField: login
+  <RegisterEndPoint>k__BackingField: register
+  <LogoutEndPoint>k__BackingField: logout
+  <DataEndPoint>k__BackingField: data/
+  <ProfileEndPoint>k__BackingField: profile/
+  <PlayerNameEndPoint>k__BackingField: name
+  <PlayerEndPoint>k__BackingField: player/
+  <PlayerLevelEndPoint>k__BackingField: level
