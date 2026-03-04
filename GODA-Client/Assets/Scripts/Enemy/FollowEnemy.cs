@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class FollowEnemy : Enemy
 {
-    public GameObject Player;
+    public GameObject player;
 
     protected override void OnEnable()
     {
@@ -13,7 +13,7 @@ public class FollowEnemy : Enemy
 
     private void Awake()
     {
-        Player = GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player");
     }
 
     private void Update()

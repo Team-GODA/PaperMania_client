@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using UnityEditor.Animations;
 
 public class Player : MonoBehaviour
 {
@@ -28,7 +27,6 @@ public class Player : MonoBehaviour
     public float SlowDebuff = 1;
     public float MoveSpeed => Speed * SlowDebuff;
 
-    //´ë½¬
     public float DashDistance = 3f;
     public float DashDuration = 0.2f;
     public float DashCooldown = 1f;
@@ -57,11 +55,11 @@ public class Player : MonoBehaviour
     {
         if (IsDashing) return;
 
-        Vector3 dir3 = new Vector3(JoyStick.Horizontal, JoyStick.Vertical, 0f);
+        Vector3 dir3 = new Vector3(JoyStick.Horizontal, 0f, JoyStick.Vertical);
         Vector3 dir = dir3.normalized;
         if (dir.sqrMagnitude > 0.0001f)
         {
-            lastMoveDirection = new Vector2(dir.x, dir.y).normalized;
+            lastMoveDirection = new Vector2(dir.x, dir.z).normalized;
         }
         transform.position += dir * MoveSpeed * Time.deltaTime;
     }
@@ -139,7 +137,7 @@ public class Player : MonoBehaviour
         float dashSpeed = DashDistance / Mathf.Max(0.0001f, DashDuration);
         while (elapsed < DashDuration)
         {
-            transform.position += (Vector3)(dir * dashSpeed * Time.deltaTime);
+            transform.position += new Vector3(dir.x, 0f, dir.y) * dashSpeed * Time.deltaTime;
             elapsed += Time.deltaTime;
             yield return null;
         }

@@ -1,0 +1,1 @@
+C:\Users\user\Desktop\My Files\Repo\PaperMania_client\GODA-Client\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\build\intermediates\cxx\RelWithDebInfo\2w5w5j2n\obj\armeabi-v7a

@@ -22,14 +22,14 @@ public class NameSet : MonoBehaviour
             Debug.Log("이름 설정 실패 : 이름을 입력하지 않았습니다!");
             return;
         }
-        Name newName = new Name
+        PlayerNameRequest newName = new PlayerNameRequest
         {
             playerName = text.text
         };
 
-        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerDataEndPoint;
+        string endpoint = endPointSO.DataEndPoint + endPointSO.PlayerEndPoint;
 
-        APIConnector.instance.Post<Response<Name>>(endpoint, newName, (user) =>
+        APIConnector.instance.Post<Response<PlayerNameResponse>>(endpoint, newName, (user) =>
         {
             Debug.Log("New Name : " + user.Data.playerName);
             OnNameSet?.Invoke();

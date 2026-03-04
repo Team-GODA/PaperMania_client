@@ -1,6 +1,6 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
+using System.Data.Common;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +15,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             if (instance == null)
             {
-                var obj = FindObjectOfType<LoadSceneManager>();
+                var obj = FindFirstObjectByType<LoadSceneManager>();
                 if (obj != null)
                 {
                     instance = obj;
@@ -52,10 +52,10 @@ public class LoadSceneManager : MonoBehaviour
     private string loadSceneName;
 
     private float sceneProgress;
-    private float apiProgress;
+    private float mainProgress;
 
     private bool sceneLoaded = false;
-    private bool apiLoaded = false;
+    private bool mainLoaded = false;
 
 
     public void MainLoadScene(string sceneName)
@@ -65,22 +65,77 @@ public class LoadSceneManager : MonoBehaviour
         loadSceneName = sceneName;
 
         sceneLoaded = false;
-        apiLoaded = false;
+        mainLoaded = false;
         sceneProgress = 0f;
-        apiProgress = 0f;
+        mainProgress = 0f;
 
         StartCoroutine(loadSceneProcess());
     }
+
+	public void LoadScene(string sceneName)
+	{
+		gameObject.SetActive(true);
+		SceneManager.sceneLoaded += OnSceneLoaded;
+		loadSceneName = sceneName;
+
+		sceneLoaded = false;
+		sceneProgress = 0f;
+
+		StartCoroutine(SceneLoadProcess());
+	}
+
+	// 로그아웃 후 클라이언트 데이터 삭제한 다음 메인 화면으로 이동
+	//  logOutProgress, dataInitalizedProgress 코루틴 사용
+	public void GoMainScene()
+    {
+        gameObject.SetActive(true);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        loadSceneName = "StartScene";
+
+        sceneLoaded = false;
+		sceneProgress = 0f;
+
+        StartCoroutine(logOutProcess());
+	}
+
     private IEnumerator loadSceneProcess()
     {
         loadingBar.value = 0f;
 
         StartCoroutine(sceneLoadCoroutine());
-        StartCoroutine(apiLoadCoroutine());
+        StartCoroutine(mainLoadCoroutine());
 
-        while(!apiLoaded || !sceneLoaded)
+        while(!mainLoaded || !sceneLoaded)
         {
-            loadingBar.value = (sceneProgress + apiProgress) / 2f;
+            loadingBar.value = (sceneProgress + mainProgress) / 2f;
+
+            yield return null;
+        }
+    }
+
+	private IEnumerator SceneLoadProcess()
+	{
+		loadingBar.value = 0f;
+
+		StartCoroutine(sceneLoadCoroutine());
+
+		while (!mainLoaded)
+		{
+			loadingBar.value = (sceneProgress) / 1f;
+
+			yield return null;
+		}
+	}
+
+	private IEnumerator logOutProcess()
+    {
+        loadingBar.value = 0f;
+
+        StartCoroutine(sceneLoadCoroutine());
+
+        while(!sceneLoaded)
+        {
+            loadingBar.value = sceneProgress / 1f;
 
             yield return null;
         }
@@ -114,23 +169,32 @@ public class LoadSceneManager : MonoBehaviour
         }
     }
 
-    IEnumerator apiLoadCoroutine()
+    IEnumerator mainLoadCoroutine()
     {
-        yield return APIManager.instance.RequestPlayerLevel();
+        yield return PlayerAPIManager.Instance.RequestPlayerLevel();
 
-        apiProgress = 0.3f;
+        mainProgress = 0.2f;
 
-        yield return APIManager.instance.RequesetPlayerName();
+        yield return PlayerAPIManager.Instance.RequesetPlayerName();
 
-        apiProgress = 0.6f;
+        mainProgress = 0.5f;
 
-        yield return APIManager.instance.RequestPlayerExp();
+        yield return PlayerAPIManager.Instance.RequestPlayerExp();
 
-        apiProgress = 1f;
+        mainProgress = 0.7f;
 
-        apiLoaded = true;
+        yield return CharacterManager.Instance.GetCharacterAll();
+
+        mainProgress = 0.8f;
+
+        yield return PlayerAPIManager.Instance.RequestCashData();
+
+        mainProgress = 1f;
+
+        mainLoaded = true;
         yield break;
     }
+
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
@@ -138,8 +202,7 @@ public class LoadSceneManager : MonoBehaviour
         {
             animator.SetTrigger("FadeOut");
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            Destroy(gameObject, 0.5f);
         }
     }
-
-
 }

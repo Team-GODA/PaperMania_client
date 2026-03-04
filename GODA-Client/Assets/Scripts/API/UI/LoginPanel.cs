@@ -1,14 +1,17 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
 {
-    public InputField IDField;
-    public InputField PWField;
+    public TMP_InputField IDField;
+    public TMP_InputField PWField;
     public UnityEvent LoginEvent;
     public UnityEvent NameSetEvent;
-    public EndpointSO endPointSO;
+    public EndpointSO EndPoint;
+
+    [Header("오류 출력")]
+    [SerializeField] private WarningText errorText;
 
     void OnEnable()
     {
@@ -18,31 +21,34 @@ public class LoginPanel : MonoBehaviour
 
     private bool isNull()
     {
+        bool n = false;
         if (IDField.text == "")
         {
-            Debug.Log("아이디가 입력되지 않았습니다!");
-            return true;
+            errorText.ShowText("아이디가 입력되지 않았습니다!");
+            n = true;
         }
-        if (PWField.text == "")
+        else if (PWField.text == "")
         {
-            Debug.Log("비밀번호가 입력되지 않았습니다!");
-            return true;
+            errorText.ShowText("비밀번호가 입력되지 않았습니다!");
+            n = true;   
         }
-        return false;
+
+        return n;
     }
 
     public void Login()
     {
+        errorText.HideText();
         if (isNull())
             return;
 
-        LoginBody body = new LoginBody
+        LoginRequest body = new LoginRequest
         {
             playerId = IDField.text,
             password = PWField.text
         };
 
-        string endpoint = endPointSO.AuthEndPoint + endPointSO.LoginEndPoint;
+        string endpoint = EndPoint.AuthEndPoint + EndPoint.LoginEndPoint;
 
         APIConnector.instance.Post<Response<LoginResponse>>(endpoint, body, (user) =>
         {
@@ -55,12 +61,13 @@ public class LoginPanel : MonoBehaviour
         }, (log) =>
         {
             Debug.Log(log);
+            errorText.ShowText("오류 로그 출력 예정");
         });
     }
 
     public void Logout()
     {
-        APIConnector.instance.Post<Response<string>>(endPointSO.LogoutEndPoint, null, (data) =>
+        APIConnector.instance.Post<Response<string>>(EndPoint.LogoutEndPoint, null, (data) =>
         {
             Debug.Log("로그아웃 되었습니다.");
             PlayerPrefs.DeleteKey("sessionId");
