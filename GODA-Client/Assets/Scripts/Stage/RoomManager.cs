@@ -33,13 +33,13 @@ public class RoomManager : MonoBehaviour
 
     private void Update()
     {
-        switch(isRunning)
+        switch (isRunning)
         {
             case false:
                 if (isOpenDoor) break;
                 else OpenDoor(); break;
             case true:
-                if(!isOpenDoor) break;
+                if (!isOpenDoor) break;
                 else CloseDoor(); break;
         }
     }
@@ -112,7 +112,7 @@ public class RoomManager : MonoBehaviour
 
     private void OpenDoor()
     {
-        foreach(var closeDoor in closedDoor)
+        foreach (var closeDoor in closedDoor)
         {
             closeDoor.gameObject.SetActive(false);
         }
@@ -121,7 +121,6 @@ public class RoomManager : MonoBehaviour
         {
             openDoor.gameObject.SetActive(true);
         }
-        Debug.Log("중복확인");
         isOpenDoor = true;
     }
 
@@ -136,7 +135,6 @@ public class RoomManager : MonoBehaviour
         {
             openDoor.gameObject.SetActive(false);
         }
-        Debug.Log("중복확인");
 
         isOpenDoor = false;
     }
