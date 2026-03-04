@@ -7,7 +7,7 @@ public class PlayerSelectManager : MonoBehaviour
     public SelectData SelectCharacterSO;
     [SerializeField] private Player player;
     [SerializeField] private Button playerSkillButton;
-    [SerializeField] private Button supporterSkillButton;
+    [SerializeField] private Button[] supporterSkillButton;
 
     private void Start()
     {
@@ -27,7 +27,6 @@ public class PlayerSelectManager : MonoBehaviour
 
 
         playerSkillButton.onClick.RemoveAllListeners();
-        supporterSkillButton.onClick.RemoveAllListeners();
 
         var skill = SelectCharacterSO.SelectCaracterData.Skill;
         if(skill != null )
@@ -35,10 +34,35 @@ public class PlayerSelectManager : MonoBehaviour
             playerSkillButton.onClick.AddListener(()=>StartCoroutine(skill.OnClickSkill()));
         }
 
-        var supSkill = SelectCharacterSO.SupporterSkill;
-        if (supSkill != null)
+
+        if (supporterSkillButton != null && supporterSkillButton.Length > 0)
         {
-            supporterSkillButton.onClick.AddListener(()=>StartCoroutine(supSkill.OnClickSkill()));
+            foreach (var btn in supporterSkillButton)
+            {
+                if (btn != null)
+                {
+                    btn.onClick.RemoveAllListeners();
+                }
+            }
+
+            var supSkills = SelectCharacterSO.SupporterSkill;
+            if (supSkills != null && supSkills.Length > 0)
+            {
+                int assignCount = Mathf.Min(supporterSkillButton.Length, supSkills.Length);
+                for (int i = 0; i < assignCount; i++)
+                {
+                    var btn = supporterSkillButton[i];
+                    var supSkill = supSkills[i];
+
+                    if (btn == null) continue;
+
+                    if (supSkill != null)
+                    {
+                        var localSupSkill = supSkill;
+                        btn.onClick.AddListener(() => StartCoroutine(localSupSkill.OnClickSkill()));
+                    }
+                }
+            }
         }
     }
 }

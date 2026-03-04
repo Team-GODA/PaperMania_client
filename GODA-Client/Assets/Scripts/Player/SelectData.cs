@@ -5,5 +5,5 @@ public class SelectData : ScriptableObject
 {
     public CharacterData SelectCaracterData;
 
-    public CharacterSkill SupporterSkill;
+    public CharacterSkill[] SupporterSkill;
 }

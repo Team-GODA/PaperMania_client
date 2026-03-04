@@ -95,4 +95,36 @@ public class RoomManager : MonoBehaviour
             col.isTrigger = isTrigger;
         }
     }
+<<<<<<< Updated upstream
+=======
+
+    private void OpenDoor()
+    {
+        foreach(var closeDoor in closedDoor)
+        {
+            closeDoor.gameObject.SetActive(false);
+        }
+
+        foreach (var openDoor in openDoor)
+        {
+            openDoor.gameObject.SetActive(true);
+        }
+        isOpenDoor = true;
+    }
+
+    private void CloseDoor()
+    {
+        foreach (var closeDoor in closedDoor)
+        {
+            closeDoor.gameObject.SetActive(true);
+        }
+
+        foreach (var openDoor in openDoor)
+        {
+            openDoor.gameObject.SetActive(false);
+        }
+
+        isOpenDoor = false;
+    }
+>>>>>>> Stashed changes
 }
