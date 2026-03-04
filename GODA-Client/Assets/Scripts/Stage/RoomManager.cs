@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class RoomManager : MonoBehaviour
 {
-    [Header("Door colliders (set Collider2D of each door)")]
-    [SerializeField] private Collider2D[] doorColliders;
+    [Header("Door colliders")]
+    [SerializeField] private Collider[] doorColliders;
 
     [Header("Spawn")]
     [SerializeField] private EnemySpawnManager spawnManager;
@@ -16,7 +16,11 @@ public class RoomManager : MonoBehaviour
 
     private int currentWave = 0;
     private bool isRunning = false;
-    [SerializeField] private bool thisRoomClear = false;
+    [SerializeField] public bool thisRoomClear = false;
+
+    public bool isOpenDoor = false;
+    [SerializeField] private GameObject[] closedDoor;
+    [SerializeField] private GameObject[] openDoor;
 
     private void Start()
     {
@@ -27,9 +31,22 @@ public class RoomManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Update()
     {
-        if (!other.CompareTag("Player")) return;
+        switch (isRunning)
+        {
+            case false:
+                if (isOpenDoor) break;
+                else OpenDoor(); break;
+            case true:
+                if (!isOpenDoor) break;
+                else CloseDoor(); break;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Player")) return;
         if (isRunning) return;
         if (thisRoomClear) return;
 
@@ -52,7 +69,7 @@ public class RoomManager : MonoBehaviour
     private IEnumerator CloseDoorsAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SetDoorsTrigger(false); 
+        SetDoorsTrigger(false);
         Debug.Log("RoomManager: Doors closed.");
     }
 
@@ -87,20 +104,15 @@ public class RoomManager : MonoBehaviour
 
     private void SetDoorsTrigger(bool isTrigger)
     {
-        if (doorColliders == null || doorColliders.Length == 0) return;
-
         foreach (var col in doorColliders)
         {
-            if (col == null) continue;
             col.isTrigger = isTrigger;
         }
     }
-<<<<<<< Updated upstream
-=======
 
     private void OpenDoor()
     {
-        foreach(var closeDoor in closedDoor)
+        foreach (var closeDoor in closedDoor)
         {
             closeDoor.gameObject.SetActive(false);
         }
@@ -126,5 +138,4 @@ public class RoomManager : MonoBehaviour
 
         isOpenDoor = false;
     }
->>>>>>> Stashed changes
 }
