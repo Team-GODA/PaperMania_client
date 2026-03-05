@@ -1,11 +1,12 @@
 ﻿[System.Serializable]
 public class CharacterResponse
 {
-	public int userId;
 	public int characterId;
-	public int characterLevel;
-	public int characterExp;
-	public int normalSkillLevel;
-	public int ultimateSkillLevel;
-	public int supportSkillLevel;
+	public string characterName;
+	public int role;
+	public int baseHP;
+	public int baseATK;
+	public int normalSkillID;
+	public int ultimateSkillID;
+	public int supportSkillID;
 }

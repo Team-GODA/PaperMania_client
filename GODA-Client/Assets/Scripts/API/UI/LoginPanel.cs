@@ -73,6 +73,8 @@ public class LoginPanel : MonoBehaviour
             PlayerPrefs.DeleteKey("sessionId");
             PlayerPrefs.DeleteKey("Id");
 
+            CharacterManager.Instance.ClearAllData();
+
             //LogoutEvent?.Invoke();
 
         }, null, true);

@@ -42,7 +42,9 @@ public class GameUIManager : MonoBehaviour
 			PlayerPrefs.DeleteKey("sessionId");
 			PlayerPrefs.DeleteKey("Id");
 
-			OnLogoutSuccess?.Invoke();
+            CharacterManager.Instance.ClearAllData();
+
+            OnLogoutSuccess?.Invoke();
 
 		}, null, true);
 	}
