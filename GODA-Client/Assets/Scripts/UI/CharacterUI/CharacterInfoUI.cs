@@ -7,7 +7,6 @@ public class CharacterInfoUI : MonoBehaviour
     [Header("Sprites")]
     [SerializeField] private Sprite supportSprite;
     [SerializeField] private Sprite mainSprite;
-    [SerializeField] private Sprite characterArt;
 
     [Header("References")]
     [SerializeField] private TMP_Text totalStat;
@@ -22,7 +21,10 @@ public class CharacterInfoUI : MonoBehaviour
         typeImage.sprite = type;
         typeShadow.sprite = type;
 
+        characterImage.sprite = CharacterManager.Instance.GetCharacterSO(characterResponse.characterId).MainArt;
+
         totalStat.text = (characterResponse.baseHP + characterResponse.baseATK).ToString("N0");
     }
     
 }
+    

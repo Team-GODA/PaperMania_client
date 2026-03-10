@@ -6,6 +6,8 @@ using UnityEngine;
 public class CharacterManager : SingleMono<CharacterManager>
 {
 	public EndpointSO EndpointSO;
+	[Header("캐릭터 SO")]
+	public List<CharacterUIData> characterSODatas = new List<CharacterUIData>();
 	[Header("모든 캐릭터")]	
 	public List<CharacterResponse> characterList;
 
@@ -22,6 +24,11 @@ public class CharacterManager : SingleMono<CharacterManager>
 			{
 				characterList = response.Data.characters;
 			}, null, true);
+	}
+
+	public CharacterUIData GetCharacterSO(int id)
+	{
+		return characterSODatas.Find(data => data.Id == id);
 	}
 
 	public void ClearAllData()

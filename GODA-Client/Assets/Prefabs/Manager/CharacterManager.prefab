@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EndpointSO: {fileID: 11400000, guid: e7c0fd7f0023bbe4b809dea463ad615f, type: 2}
+  characterSODatas:
+  - {fileID: 11400000, guid: 130342ab35e21224a91a03586498ccae, type: 2}
+  - {fileID: 11400000, guid: 9eea0263423aad84a810fdc1e7af2a80, type: 2}
+  - {fileID: 11400000, guid: 02ecbedf1a4514040a249d694014edad, type: 2}
   characterList: []
-  characterSOs: []
   ownCharacters: []
   notOwnCharacters: []

@@ -42,6 +42,7 @@ public class CharacterCanvas : MonoBehaviour
 
                 ui.SetUIData(allCharacter[i]);
                 ownCharacter.Add(ui);   // <- 여기도 부모에 따라 변경
+                yield return null;
             }
         }
         else
